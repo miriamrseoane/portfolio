@@ -1,1 +1,92 @@
+* {
+  box-sizing: border-box;
+}
 
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  background: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header,
+.site-footer {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  padding: 24px 32px;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-header {
+  top: 0;
+}
+
+.site-footer {
+  bottom: 0;
+}
+
+.logo,
+.site-header a,
+.site-footer p {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.home {
+  height: 100vh;
+  padding: 72px 0;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.about {
+  min-height: 100vh;
+  padding: 120px 32px 100px;
+}
+
+.about-content {
+  max-width: 720px;
+}
+
+.about-content h1 {
+  font-size: 48px;
+  font-weight: 400;
+  margin: 0 0 32px;
+}
+
+.about-content p {
+  font-size: 22px;
+  line-height: 1.35;
+}
