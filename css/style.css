@@ -6,7 +6,7 @@ html,
 body {
   margin: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   font-family: Arial, Helvetica, sans-serif;
   color: #111;
   background: #F3F3F0;
@@ -57,8 +57,11 @@ a {
 .work-slider {
   width: 100vw;
   height: 100vh;
+  padding-top: 72px;
+  padding-bottom: 72px;
   overflow: hidden;
   cursor: grab;
+  touch-action: none;
 }
 
 .work-slider:active {
@@ -68,16 +71,16 @@ a {
 .slider-track {
   display: flex;
   align-items: center;
-  gap: 5vw;
+  gap: 6vw;
   height: 100%;
-  padding-left: 10vw;
+  padding-left: 8vw;
   will-change: transform;
 }
 
 .slide {
   flex: 0 0 auto;
-  width: 60vw;
-  height: 70vh;
+  width: 65vw;
+  height: 100%;
   display: block;
 }
 
@@ -113,15 +116,23 @@ a {
 }
 
 @media (max-width: 768px) {
+  .site-header,
+  .site-footer {
+    padding: 20px 24px;
+  }
 
-  .slide {
-    width: 85vw;
-    height: 60vh;
+  .work-slider {
+    padding-top: 68px;
+    padding-bottom: 68px;
   }
 
   .slider-track {
     gap: 8vw;
     padding-left: 8vw;
+  }
+
+  .slide {
+    width: 86vw;
   }
 
   .about-content h1 {
@@ -131,5 +142,4 @@ a {
   .about-content p {
     font-size: 18px;
   }
-
 }
