@@ -7,8 +7,8 @@ if (slider && track) {
   let current = 0;
   let target = 0;
 
-  const ease = 0.075;
-  const autoplaySpeed = 1;
+  const ease = 0.04;
+  const autoplaySpeed = 0.3;
 
   let isDragging = false;
   let startX = 0;
