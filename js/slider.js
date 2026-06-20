@@ -3,12 +3,12 @@ console.log("Slider JS cargado");
 const slider = document.querySelector(".work-slider");
 const track = document.querySelector(".slider-track");
 
-console.log(slider, track);
-
 if (slider && track) {
   let current = 0;
   let target = 0;
+
   const ease = 0.075;
+  const autoplaySpeed = 0.6;
 
   let isDragging = false;
   let startX = 0;
@@ -26,6 +26,10 @@ if (slider && track) {
   }
 
   function animate() {
+    if (!isDragging) {
+      target -= autoplaySpeed;
+    }
+
     current += (target - current) * ease;
 
     const width = getTrackWidth();
