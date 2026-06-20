@@ -90,3 +90,49 @@ a {
   font-size: 22px;
   line-height: 1.35;
 }
+
+.work-slider {
+  width: 100vw;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  cursor: grab;
+}
+
+.work-slider:active {
+  cursor: grabbing;
+}
+
+.slider-track {
+  display: flex;
+  align-items: center;
+  gap: 4vw;
+  height: 100%;
+  will-change: transform;
+}
+
+.slide {
+  flex: 0 0 auto;
+  width: 55vw;
+  height: 70vh;
+  display: block;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .slide {
+    width: 85vw;
+    height: 65vh;
+  }
+
+  .slider-track {
+    gap: 8vw;
+  }
+}
