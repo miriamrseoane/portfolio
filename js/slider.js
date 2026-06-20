@@ -8,13 +8,13 @@ console.log(slider, track);
 if (slider && track) {
   let current = 0;
   let target = 0;
-  let ease = 0.075;
+  const ease = 0.075;
 
   let isDragging = false;
   let startX = 0;
   let startTarget = 0;
 
-  const slides = [...track.children];
+  const slides = Array.from(track.children);
 
   slides.forEach(slide => {
     const clone = slide.cloneNode(true);
@@ -45,25 +45,35 @@ if (slider && track) {
     requestAnimationFrame(animate);
   }
 
-  slider.addEventListener("wheel", e => {
-    e.preventDefault();
-    target -= e.deltaY + e.deltaX;
-  }, { passive: false });
+  slider.addEventListener(
+    "wheel",
+    event => {
+      event.preventDefault();
+      target -= event.deltaY + event.deltaX;
+    },
+    { passive: false }
+  );
 
-  slider.addEventListener("pointerdown", e => {
+  slider.addEventListener("pointerdown", event => {
     isDragging = true;
-    startX = e.clientX;
+    startX = event.clientX;
     startTarget = target;
-    slider.setPointerCapture(e.pointerId);
+    slider.setPointerCapture(event.pointerId);
   });
 
-  slider.addEventListener("pointermove", e => {
+  slider.addEventListener("pointermove", event => {
     if (!isDragging) return;
-    const diff = e.clientX - startX;
-    target = startTarget + diff;
+
+    const difference = event.clientX - startX;
+    target = startTarget + difference;
   });
 
-  slider.addEventListener("pointerup", () => {
+  slider.addEventListener("pointerup", event => {
+    isDragging = false;
+    slider.releasePointerCapture(event.pointerId);
+  });
+
+  slider.addEventListener("pointercancel", () => {
     isDragging = false;
   });
 
