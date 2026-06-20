@@ -1,3 +1,10 @@
+console.log("Slider JS cargado");
+
+const slider = document.querySelector(".work-slider");
+const track = document.querySelector(".slider-track");
+
+console.log(slider, track);
+
 const slider = document.querySelector(".work-slider");
 const track = document.querySelector(".slider-track");
 
