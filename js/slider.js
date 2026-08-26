@@ -1,89 +1,34 @@
-console.log("Slider JS cargado");
+const gallery = document.querySelector(".background-gallery");
+const images = document.querySelectorAll(".background-image");
 
-const slider = document.querySelector(".work-slider");
-const track = document.querySelector(".slider-track");
+let currentImage = 0;
+let interval;
 
-if (slider && track) {
-  let current = 0;
-  let target = 0;
+const imageDuration = 4000;
 
-  const ease = 0.04;
-  const autoplaySpeed = 1;
+function showNextImage() {
+  images[currentImage].classList.remove("active");
 
-  let isDragging = false;
-  let startX = 0;
-  let startTarget = 0;
+  currentImage = (currentImage + 1) % images.length;
 
-  const slides = Array.from(track.children);
+  images[currentImage].classList.add("active");
+}
 
-  slides.forEach(slide => {
-    const clone = slide.cloneNode(true);
-    track.appendChild(clone);
+function startAutoplay() {
+  clearInterval(interval);
+
+  interval = setInterval(() => {
+    showNextImage();
+  }, imageDuration);
+}
+
+if (images.length > 1 && gallery) {
+
+  startAutoplay();
+
+  gallery.addEventListener("click", () => {
+    showNextImage();
+    startAutoplay();
   });
 
-  function getTrackWidth() {
-    return track.scrollWidth / 2;
-  }
-
-  function animate() {
-    if (!isDragging) {
-      target -= autoplaySpeed;
-    }
-
-    current += (target - current) * ease;
-
-    const width = getTrackWidth();
-
-    if (current <= -width) {
-      current += width;
-      target += width;
-    }
-
-    if (current > 0) {
-      current -= width;
-      target -= width;
-    }
-
-    track.style.transform = `translate3d(${current}px, 0, 0)`;
-
-    requestAnimationFrame(animate);
-  }
-
-  slider.addEventListener(
-    "wheel",
-    event => {
-      event.preventDefault();
-      target -= event.deltaY + event.deltaX;
-    },
-    { passive: false }
-  );
-
-  slider.addEventListener("pointerdown", event => {
-    isDragging = true;
-    startX = event.clientX;
-    startTarget = target;
-    slider.setPointerCapture(event.pointerId);
-  });
-
-  slider.addEventListener("pointermove", event => {
-    if (!isDragging) return;
-
-    const difference = event.clientX - startX;
-    target = startTarget + difference;
-  });
-
-  slider.addEventListener("pointerup", event => {
-    isDragging = false;
-    slider.releasePointerCapture(event.pointerId);
-  });
-
-  slider.addEventListener("pointercancel", () => {
-    isDragging = false;
-  });
-
-  slider.addEventListener("pointerleave", () => {
-    isDragging = false;
-  });
-
-  animate();
 }
