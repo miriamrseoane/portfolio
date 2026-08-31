@@ -1,4 +1,5 @@
 const gallery = document.querySelector(".stack-gallery");
+
 const images = Array.from(
   document.querySelectorAll(".gallery-image")
 );
@@ -38,49 +39,87 @@ function updateInfo() {
     counter.textContent =
       `${formatNumber(currentIndex + 1)} / ${formatNumber(images.length)}`;
   }
+
 }
 
 
 /* =========================================
-   SHOW IMAGE
+   INITIALIZE STACK
 ========================================= */
 
-function showImage(index) {
+function initializeStack() {
 
-  images.forEach((image, imageIndex) => {
+  images.forEach((image) => {
 
-    image.classList.remove("active");
+    image.classList.remove("visible");
+    image.classList.remove("entering");
 
-    /*
-      La imagen actual queda siempre
-      por encima de las anteriores.
-    */
-
-    if (imageIndex === index) {
-      image.style.zIndex = images.length + 1;
-    } else {
-      image.style.zIndex = imageIndex + 1;
-    }
+    image.style.zIndex = 0;
 
   });
 
 
-  images[index].classList.add("active");
+  /* Primera imagen */
+
+  images[0].classList.add("visible");
+
+  images[0].style.zIndex = 1;
+
+  currentIndex = 0;
 
   updateInfo();
+
 }
 
 
 /* =========================================
-   NEXT IMAGE
+   SHOW NEXT IMAGE
 ========================================= */
 
 function showNextImage() {
 
-  currentIndex =
+  const nextIndex =
     (currentIndex + 1) % images.length;
 
-  showImage(currentIndex);
+
+  /* Si volvemos al principio,
+     limpiamos la pila */
+
+  if (nextIndex === 0) {
+
+    initializeStack();
+
+    return;
+
+  }
+
+
+  currentIndex = nextIndex;
+
+  const nextImage = images[currentIndex];
+
+
+  /* Nueva imagen encima */
+
+  nextImage.style.zIndex =
+    currentIndex + 1;
+
+  nextImage.classList.add("visible");
+  nextImage.classList.add("entering");
+
+
+  /* Quitar animación de entrada
+     una vez terminada */
+
+  setTimeout(() => {
+
+    nextImage.classList.remove("entering");
+
+  }, 900);
+
+
+  updateInfo();
+
 }
 
 
@@ -93,21 +132,26 @@ function startAutoplay() {
   clearInterval(interval);
 
   interval = setInterval(() => {
+
     showNextImage();
+
   }, imageDuration);
+
 }
 
 
 /* =========================================
-   INITIALIZE
+   START
 ========================================= */
 
 if (images.length > 0) {
 
-  showImage(currentIndex);
+  initializeStack();
 
   if (images.length > 1) {
+
     startAutoplay();
+
   }
 
 }
@@ -122,11 +166,6 @@ if (gallery && images.length > 1) {
   gallery.addEventListener("click", () => {
 
     showNextImage();
-
-    /*
-      Reiniciamos el temporizador
-      después del clic.
-    */
 
     startAutoplay();
 
