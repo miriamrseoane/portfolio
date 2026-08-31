@@ -1,241 +1,92 @@
-const gallery = document.querySelector(".background-gallery");
-const images = document.querySelectorAll(".background-image");
+const gallery = document.querySelector(".stack-gallery");
+const images = Array.from(
+  document.querySelectorAll(".gallery-image")
+);
 
-const logo = document.querySelector(".logo");
-const nav = document.querySelector(".site-header nav");
-const footer = document.querySelector(".site-footer p");
+const credit = document.querySelector(".gallery-credit");
+const counter = document.querySelector(".gallery-counter");
 
-let currentImage = 0;
+let currentIndex = 0;
 let interval;
 
 const imageDuration = 4000;
 
 
-/* ---------------------------------
-   CALCULAR LUMINOSIDAD DE UNA ZONA
----------------------------------- */
+/* =========================================
+   FORMAT NUMBER
+========================================= */
 
-function getRegionBrightness(image, region) {
+function formatNumber(number) {
+  return String(number).padStart(2, "0");
+}
 
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d", {
-    willReadFrequently: true
+
+/* =========================================
+   UPDATE INFO
+========================================= */
+
+function updateInfo() {
+
+  const currentImage = images[currentIndex];
+
+  if (credit) {
+    credit.textContent =
+      currentImage.dataset.credit || "";
+  }
+
+  if (counter) {
+    counter.textContent =
+      `${formatNumber(currentIndex + 1)} / ${formatNumber(images.length)}`;
+  }
+}
+
+
+/* =========================================
+   SHOW IMAGE
+========================================= */
+
+function showImage(index) {
+
+  images.forEach((image, imageIndex) => {
+
+    image.classList.remove("active");
+
+    /*
+      La imagen actual queda siempre
+      por encima de las anteriores.
+    */
+
+    if (imageIndex === index) {
+      image.style.zIndex = images.length + 1;
+    } else {
+      image.style.zIndex = imageIndex + 1;
+    }
+
   });
 
-  const sampleWidth = 60;
-  const sampleHeight = 40;
 
-  canvas.width = sampleWidth;
-  canvas.height = sampleHeight;
+  images[index].classList.add("active");
 
-
-  /* Medidas reales de la imagen */
-
-  const imageWidth = image.naturalWidth;
-  const imageHeight = image.naturalHeight;
-
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
-
-
-  /* Simular object-fit: cover */
-
-  const imageRatio = imageWidth / imageHeight;
-  const screenRatio = screenWidth / screenHeight;
-
-  let renderedWidth;
-  let renderedHeight;
-  let offsetX;
-  let offsetY;
-
-  if (imageRatio > screenRatio) {
-
-    renderedHeight = screenHeight;
-    renderedWidth = imageWidth * (screenHeight / imageHeight);
-
-    offsetX = (renderedWidth - screenWidth) / 2;
-    offsetY = 0;
-
-  } else {
-
-    renderedWidth = screenWidth;
-    renderedHeight = imageHeight * (screenWidth / imageWidth);
-
-    offsetX = 0;
-    offsetY = (renderedHeight - screenHeight) / 2;
-
-  }
-
-
-  /* Convertir coordenadas de pantalla
-     a coordenadas de la imagen original */
-
-  const scaleX = imageWidth / renderedWidth;
-  const scaleY = imageHeight / renderedHeight;
-
-  const sourceX =
-    (region.x + offsetX) * scaleX;
-
-  const sourceY =
-    (region.y + offsetY) * scaleY;
-
-  const sourceWidth =
-    region.width * scaleX;
-
-  const sourceHeight =
-    region.height * scaleY;
-
-
-  context.drawImage(
-    image,
-
-    sourceX,
-    sourceY,
-    sourceWidth,
-    sourceHeight,
-
-    0,
-    0,
-    sampleWidth,
-    sampleHeight
-  );
-
-
-  const pixels = context.getImageData(
-    0,
-    0,
-    sampleWidth,
-    sampleHeight
-  ).data;
-
-
-  let totalBrightness = 0;
-  let pixelCount = 0;
-
-  for (let i = 0; i < pixels.length; i += 4) {
-
-    const red = pixels[i];
-    const green = pixels[i + 1];
-    const blue = pixels[i + 2];
-
-    const brightness =
-      red * 0.299 +
-      green * 0.587 +
-      blue * 0.114;
-
-    totalBrightness += brightness;
-
-    pixelCount++;
-  }
-
-
-  return totalBrightness / pixelCount;
+  updateInfo();
 }
 
 
-/* ---------------------------------
-   CAMBIAR COLOR DEL TEXTO
----------------------------------- */
-
-function updateTextColors(image) {
-
-  if (!image.complete || !image.naturalWidth) {
-    image.addEventListener(
-      "load",
-      () => updateTextColors(image),
-      { once: true }
-    );
-
-    return;
-  }
-
-
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-
-
-  /* Zona detrás del logo */
-
-  const logoRegion = {
-    x: 15,
-    y: 10,
-    width: 250,
-    height: 70
-  };
-
-
-  /* Zona detrás de About */
-
-  const navRegion = {
-    x: width - 180,
-    y: 10,
-    width: 170,
-    height: 70
-  };
-
-
-  /* Zona detrás del footer */
-
-  const footerRegion = {
-    x: 15,
-    y: height - 80,
-    width: 180,
-    height: 70
-  };
-
-
-  const logoBrightness =
-    getRegionBrightness(image, logoRegion);
-
-  const navBrightness =
-    getRegionBrightness(image, navRegion);
-
-  const footerBrightness =
-    getRegionBrightness(image, footerRegion);
-
-
-  /* Umbral de luminosidad */
-
-  const threshold = 125;
-
-
-  logo.classList.toggle(
-    "is-light",
-    logoBrightness < threshold
-  );
-
-  nav.classList.toggle(
-    "is-light",
-    navBrightness < threshold
-  );
-
-  footer.classList.toggle(
-    "is-light",
-    footerBrightness < threshold
-  );
-}
-
-
-/* ---------------------------------
-   SIGUIENTE IMAGEN
----------------------------------- */
+/* =========================================
+   NEXT IMAGE
+========================================= */
 
 function showNextImage() {
 
-  images[currentImage].classList.remove("active");
+  currentIndex =
+    (currentIndex + 1) % images.length;
 
-  currentImage =
-    (currentImage + 1) % images.length;
-
-  images[currentImage].classList.add("active");
-
-  updateTextColors(images[currentImage]);
+  showImage(currentIndex);
 }
 
 
-/* ---------------------------------
+/* =========================================
    AUTOPLAY
----------------------------------- */
+========================================= */
 
 function startAutoplay() {
 
@@ -244,17 +95,16 @@ function startAutoplay() {
   interval = setInterval(() => {
     showNextImage();
   }, imageDuration);
-
 }
 
 
-/* ---------------------------------
-   INICIO
----------------------------------- */
+/* =========================================
+   INITIALIZE
+========================================= */
 
 if (images.length > 0) {
 
-  updateTextColors(images[currentImage]);
+  showImage(currentIndex);
 
   if (images.length > 1) {
     startAutoplay();
@@ -263,9 +113,9 @@ if (images.length > 0) {
 }
 
 
-/* ---------------------------------
-   CLICK PARA AVANZAR
----------------------------------- */
+/* =========================================
+   CLICK TO ADVANCE
+========================================= */
 
 if (gallery && images.length > 1) {
 
@@ -273,21 +123,13 @@ if (gallery && images.length > 1) {
 
     showNextImage();
 
+    /*
+      Reiniciamos el temporizador
+      después del clic.
+    */
+
     startAutoplay();
 
   });
 
 }
-
-
-/* ---------------------------------
-   RECALCULAR AL CAMBIAR VENTANA
----------------------------------- */
-
-window.addEventListener("resize", () => {
-
-  if (images.length > 0) {
-    updateTextColors(images[currentImage]);
-  }
-
-});
