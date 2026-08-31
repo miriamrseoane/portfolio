@@ -18,8 +18,6 @@ body {
 
   color: #111;
   background: #F3F3F0;
-
-  border-radius: 0 !important;
 }
 
 body {
@@ -33,61 +31,34 @@ a {
 
 
 /* =========================================
-   HEADER + FOOTER
+   HEADER
 ========================================= */
 
-.site-header,
-.site-footer {
+.site-header {
   position: fixed;
+
+  top: 0;
   left: 0;
 
   width: 100%;
 
   padding: 24px 32px;
 
-  z-index: 100;
+  z-index: 1000;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  border-radius: 0 !important;
 }
-
-.site-header {
-  top: 0;
-}
-
-.site-footer {
-  bottom: 0;
-}
-
-
-/* =========================================
-   TYPOGRAPHY
-========================================= */
 
 .logo,
-.site-header nav,
-.site-footer p {
+.site-header nav {
   margin: 0;
 
   font-size: 14px;
   font-weight: 400;
 
   color: #111;
-
-  transition: color 0.8s ease;
-}
-
-
-/* Texto blanco cuando la zona de la
-   imagen situada detrás es oscura */
-
-.logo.is-light,
-.site-header nav.is-light,
-.site-footer p.is-light {
-  color: #fff;
 }
 
 
@@ -105,73 +76,105 @@ a {
   padding: 0;
 
   overflow: hidden;
-
-  border-radius: 0 !important;
 }
 
 
 /* =========================================
-   BACKGROUND GALLERY
+   STACK GALLERY
 ========================================= */
 
-.background-gallery {
+.stack-gallery {
   position: absolute;
 
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  width: 100vw;
-  height: 100vh;
-
-  margin: 0;
-  padding: 0;
-
-  overflow: hidden;
-
-  cursor: pointer;
-
-  border-radius: 0 !important;
-}
-
-
-/* =========================================
-   BACKGROUND IMAGES
-========================================= */
-
-.background-image {
-  position: absolute;
-
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
 
   width: 100%;
   height: 100%;
 
-  margin: 0;
-  padding: 0;
-
-  object-fit: cover;
-  object-position: center;
-
-  opacity: 0;
-
-  transition: opacity 1.4s ease;
-
-  user-select: none;
-  pointer-events: none;
-
-  border-radius: 0 !important;
+  cursor: pointer;
 }
 
 
-/* Imagen actualmente visible */
+/* =========================================
+   IMAGES
+========================================= */
 
-.background-image.active {
+.gallery-image {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: auto;
+  height: auto;
+
+  max-width: calc(100vw - 180px);
+  max-height: calc(100vh - 180px);
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.985);
+
+  object-fit: contain;
+
+  opacity: 0;
+
+  pointer-events: none;
+  user-select: none;
+
+  transition:
+    opacity 0.7s ease,
+    transform 0.9s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+
+/* Imagen visible */
+
+.gallery-image.active {
   opacity: 1;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+
+
+/* =========================================
+   FOOTER / PROJECT INFO
+========================================= */
+
+.site-footer {
+  position: fixed;
+
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+
+  padding: 24px 32px;
+
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  pointer-events: none;
+}
+
+.gallery-credit,
+.gallery-counter {
+  margin: 0;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  color: #111;
 }
 
 
@@ -207,6 +210,7 @@ a {
 
 /* =========================================
    MOBILE
+   Lo afinaremos más adelante
 ========================================= */
 
 @media (max-width: 768px) {
@@ -216,25 +220,16 @@ a {
     padding: 20px 24px;
   }
 
+  .gallery-image {
+    max-width: calc(100vw - 48px);
+    max-height: calc(100vh - 160px);
+  }
+
   .logo,
   .site-header nav,
-  .site-footer p {
-    font-size: 14px;
-  }
-
-  .about {
-    padding:
-      100px
-      24px
-      80px;
-  }
-
-  .about-content h1 {
-    font-size: 36px;
-  }
-
-  .about-content p {
-    font-size: 18px;
+  .gallery-credit,
+  .gallery-counter {
+    font-size: 13px;
   }
 
 }
