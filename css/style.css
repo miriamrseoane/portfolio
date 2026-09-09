@@ -1,7 +1,3 @@
-/* =========================================
-   RESET
-========================================= */
-
 * {
   box-sizing: border-box;
 }
@@ -9,21 +5,14 @@
 html,
 body {
   margin: 0;
-  padding: 0;
-
   width: 100%;
-  height: 100%;
-
-  font-family: Arial, Helvetica, sans-serif;
-
-  color: #111;
-  background: #F3F3F0;
-
-  border-radius: 0;
+  min-height: 100%;
 }
 
 body {
-  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  background: #fff;
 }
 
 a {
@@ -32,277 +21,72 @@ a {
 }
 
 
-/* =========================================
-   HEADER
-========================================= */
+/* ========================================
+   HEADER + FOOTER GLOBAL
+   Compartidos por Home y About
+======================================== */
 
-.site-header {
+.site-header,
+.site-footer {
   position: fixed;
-
-  top: 0;
   left: 0;
-
   width: 100%;
-
   padding: 24px 32px;
-
-  z-index: 1000;
+  z-index: 100;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.site-header {
+  top: 0;
+}
+
+.site-footer {
+  bottom: 0;
+}
+
 .logo,
-.site-header nav {
+.site-header a,
+.site-footer p {
   margin: 0;
-
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
-
-  color: #111;
 }
 
 
-/* =========================================
+/* ========================================
    HOME
-========================================= */
+======================================== */
 
 .home {
-  position: relative;
-
-  width: 100vw;
   height: 100vh;
-
-  margin: 0;
-  padding: 0;
-
-  overflow: hidden;
-
-  border-radius: 0;
+  padding: 72px 0;
 }
 
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
-/* =========================================
-   STACK GALLERY
-========================================= */
-
-.stack-gallery {
+.slide {
   position: absolute;
-
   inset: 0;
 
   width: 100%;
   height: 100%;
 
-  margin: 0;
-  padding: 0;
-
-  overflow: hidden;
-
-  cursor: pointer;
-
-  border-radius: 0;
-}
-
-
-/* =========================================
-   GALLERY IMAGES
-========================================= */
-
-.gallery-image {
-  position: absolute;
-
-  top: 50%;
-  left: 50%;
-
-  width: auto;
-  height: auto;
-
-  max-width: calc(100vw - 180px);
-  max-height: calc(100vh - 180px);
-
-  object-fit: contain;
-
-  transform:
-    translate(-50%, -50%)
-    scale(1);
+  object-fit: cover;
 
   opacity: 0;
-
-  pointer-events: none;
-  user-select: none;
-
-  border-radius: 0;
+  transition: opacity 0.8s ease;
 }
 
-
-/* =========================================
-   VISIBLE IMAGES
-========================================= */
-
-/*
-Las imágenes que ya han aparecido
-permanecen visibles.
-
-Esto crea el efecto de pila.
-*/
-
-.gallery-image.visible {
+.slide.active {
   opacity: 1;
-}
-
-
-/* =========================================
-   IMAGE ENTER ANIMATION
-========================================= */
-
-/*
-Cada nueva imagen aparece por encima
-de las anteriores.
-*/
-
-.gallery-image.entering {
-  animation:
-    imageEnter
-    0.8s
-    cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-
-/* =========================================
-   IMAGE ENTER KEYFRAMES
-========================================= */
-
-@keyframes imageEnter {
-
-  from {
-    opacity: 0;
-
-    transform:
-      translate(-50%, -50%)
-      scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translate(-50%, -50%)
-      scale(1);
-  }
-
-}
-
-
-/* =========================================
-   FOOTER / PROJECT INFO
-========================================= */
-
-.site-footer {
-  position: fixed;
-
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-
-  padding: 24px 32px;
-
-  z-index: 1000;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  pointer-events: none;
-}
-
-.gallery-credit,
-.gallery-counter {
-  margin: 0;
-
-  font-size: 14px;
-  font-weight: 400;
-
-  color: #111;
-}
-
-
-/* =========================================
-   ABOUT
-========================================= */
-
-.about {
-  min-height: 100vh;
-
-  padding:
-    120px
-    32px
-    100px;
-}
-
-.about-content {
-  max-width: 720px;
-}
-
-.about-content h1 {
-  margin: 0 0 32px;
-
-  font-size: 48px;
-  font-weight: 400;
-}
-
-.about-content p {
-  font-size: 22px;
-  line-height: 1.35;
-}
-
-
-/* =========================================
-   MOBILE
-   Lo afinaremos más adelante
-========================================= */
-
-@media (max-width: 768px) {
-
-  .site-header,
-  .site-footer {
-    padding: 20px 24px;
-  }
-
-
-  .gallery-image {
-    max-width: calc(100vw - 48px);
-    max-height: calc(100vh - 160px);
-  }
-
-
-  .logo,
-  .site-header nav,
-  .gallery-credit,
-  .gallery-counter {
-    font-size: 13px;
-  }
-
-
-  .about {
-    padding:
-      100px
-      24px
-      80px;
-  }
-
-
-  .about-content h1 {
-    font-size: 36px;
-  }
-
-
-  .about-content p {
-    font-size: 18px;
-  }
-
 }
 
 
@@ -316,27 +100,11 @@ de las anteriores.
 }
 
 
-/* Header específico About */
+/* Para que el footer no deje ver contenido
+   por debajo cuando hacemos scroll */
 
-.about-page .site-header {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 268px);
-  padding: 32px 0;
-  z-index: 100;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.about-page .site-header a {
-  color: #111;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 400;
+.about-page .site-footer {
+  background: #f4f4f1;
 }
 
 
@@ -345,6 +113,7 @@ de las anteriores.
 .about-main {
   width: calc(100% - 296px);
   max-width: 1144px;
+
   margin: 0 auto;
 
   display: grid;
@@ -356,7 +125,7 @@ de las anteriores.
 }
 
 
-/* Columna bio */
+/* Bio */
 
 .about-bio {
   max-width: 455px;
@@ -372,7 +141,7 @@ de las anteriores.
 }
 
 
-/* Títulos pequeños */
+/* Bloques secundarios */
 
 .about-block h2 {
   margin: 0 0 26px 0;
@@ -382,9 +151,6 @@ de las anteriores.
   font-weight: 400;
   letter-spacing: 0.22em;
 }
-
-
-/* Textos secundarios */
 
 .about-block p,
 .about-item p {
@@ -440,35 +206,16 @@ de las anteriores.
 }
 
 
-/* Footer About */
-
-.about-page .site-footer {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-
-  width: calc(100% - 268px);
-  padding: 27px 0;
-
-  background: #f4f4f1;
-}
-
-.about-page .site-footer p {
-  margin: 0;
-  font-size: 14px;
-}
-
-
 /* ========================================
-   ABOUT — RESPONSIVE
+   RESPONSIVE
 ======================================== */
 
 @media (max-width: 900px) {
 
-  .about-page .site-header,
-  .about-page .site-footer {
-    width: calc(100% - 40px);
+  .site-header,
+  .site-footer {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .about-main {
