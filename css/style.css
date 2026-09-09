@@ -1,94 +1,326 @@
+/* =========================================
+  RESET
+========================================= */
+
 * {
-  box-sizing: border-box;
+box-sizing: border-box;
 }
 
 html,
 body {
-  margin: 0;
-  width: 100%;
-  min-height: 100%;
+margin: 0;
+padding: 0;
+
+width: 100%;
+height: 100%;
+
+font-family: Arial, Helvetica, sans-serif;
+
+color: #111;
+background: #F3F3F0;
+
+  border-radius: 0;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #111;
-  background: #fff;
+overflow: hidden;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+color: inherit;
+text-decoration: none;
 }
 
 
-/* ========================================
-   HEADER + FOOTER GLOBAL
-   Compartidos por Home y About
-======================================== */
-
-.site-header,
-.site-footer {
-  position: fixed;
-  left: 0;
-  width: 100%;
-  padding: 24px 32px;
-  z-index: 100;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+/* =========================================
+  HEADER
+========================================= */
 
 .site-header {
-  top: 0;
-}
+position: fixed;
 
-.site-footer {
-  bottom: 0;
+top: 0;
+left: 0;
+
+width: 100%;
+
+padding: 24px 32px;
+
+z-index: 1000;
+
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
 
 .logo,
-.site-header a,
-.site-footer p {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 400;
+.site-header nav {
+margin: 0;
+
+font-size: 14px;
+font-weight: 400;
+
+color: #111;
 }
 
 
-/* ========================================
-   HOME
-======================================== */
+/* =========================================
+  HOME
+========================================= */
 
 .home {
-  height: 100vh;
-  padding: 72px 0;
+position: relative;
+
+width: 100vw;
+height: 100vh;
+
+margin: 0;
+padding: 0;
+
+overflow: hidden;
+
+  border-radius: 0;
 }
 
-.slider {
-  position: relative;
-  width: 100%;
-  height: 100%;
+
+/* =========================================
+  STACK GALLERY
+========================================= */
+
+.stack-gallery {
+position: absolute;
+
+inset: 0;
+
+width: 100%;
+height: 100%;
+
+  margin: 0;
+  padding: 0;
+
   overflow: hidden;
+
+cursor: pointer;
+
+  border-radius: 0;
 }
 
-.slide {
-  position: absolute;
-  inset: 0;
 
-  width: 100%;
-  height: 100%;
+/* =========================================
+   IMAGES
+   GALLERY IMAGES
+========================================= */
 
-  object-fit: cover;
+.gallery-image {
+position: absolute;
 
-  opacity: 0;
-  transition: opacity 0.8s ease;
+top: 50%;
+left: 50%;
+
+width: auto;
+height: auto;
+
+max-width: calc(100vw - 180px);
+max-height: calc(100vh - 180px);
+
+  object-fit: contain;
+
+transform:
+translate(-50%, -50%)
+    scale(0.985);
+
+  object-fit: contain;
+    scale(1);
+
+opacity: 0;
+
+pointer-events: none;
+user-select: none;
+
+  transition:
+    opacity 0.7s ease,
+    transform 0.9s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+  border-radius: 0;
 }
 
-.slide.active {
-  opacity: 1;
+
+/* Imagen visible */
+/* =========================================
+   VISIBLE IMAGES
+========================================= */
+
+/*
+Las imágenes que ya han aparecido
+permanecen visibles.
+
+.gallery-image.active {
+Esto crea el efecto de pila.
+*/
+
+.gallery-image.visible {
+opacity: 1;
 }
 
+
+/* =========================================
+   IMAGE ENTER ANIMATION
+========================================= */
+
+/*
+Cada nueva imagen aparece por encima
+de las anteriores.
+*/
+
+.gallery-image.entering {
+  animation:
+    imageEnter
+    0.8s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================
+   IMAGE ENTER KEYFRAMES
+========================================= */
+
+@keyframes imageEnter {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+
+
+/* =========================================
+  FOOTER / PROJECT INFO
+========================================= */
+
+.site-footer {
+position: fixed;
+
+bottom: 0;
+left: 0;
+
+width: 100%;
+
+padding: 24px 32px;
+
+z-index: 1000;
+
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+pointer-events: none;
+}
+
+.gallery-credit,
+.gallery-counter {
+margin: 0;
+
+font-size: 14px;
+font-weight: 400;
+
+color: #111;
+}
+
+
+/* =========================================
+  ABOUT
+========================================= */
+
+.about {
+min-height: 100vh;
+
+padding:
+120px
+32px
+100px;
+}
+
+.about-content {
+max-width: 720px;
+}
+
+.about-content h1 {
+margin: 0 0 32px;
+
+font-size: 48px;
+font-weight: 400;
+}
+
+.about-content p {
+font-size: 22px;
+line-height: 1.35;
+}
+
+
+/* =========================================
+  MOBILE
+  Lo afinaremos más adelante
+========================================= */
+
+@media (max-width: 768px) {
+
+.site-header,
+.site-footer {
+padding: 20px 24px;
+}
+
+
+.gallery-image {
+max-width: calc(100vw - 48px);
+max-height: calc(100vh - 160px);
+}
+
+
+.logo,
+.site-header nav,
+.gallery-credit,
+.gallery-counter {
+font-size: 13px;
+}
+
+
+  .about {
+    padding:
+      100px
+      24px
+      80px;
+  }
+
+
+  .about-content h1 {
+    font-size: 36px;
+  }
+
+
+  .about-content p {
+    font-size: 18px;
+  }
+
+}
 
 /* ========================================
    ABOUT
@@ -100,8 +332,8 @@ a {
 }
 
 
-/* Para que el footer no deje ver contenido
-   por debajo cuando hacemos scroll */
+/* El footer mantiene exactamente la posición
+   de la Home; solo cambiamos su fondo */
 
 .about-page .site-footer {
   background: #f4f4f1;
@@ -113,7 +345,6 @@ a {
 .about-main {
   width: calc(100% - 296px);
   max-width: 1144px;
-
   margin: 0 auto;
 
   display: grid;
@@ -141,7 +372,7 @@ a {
 }
 
 
-/* Bloques secundarios */
+/* Títulos */
 
 .about-block h2 {
   margin: 0 0 26px 0;
@@ -151,6 +382,9 @@ a {
   font-weight: 400;
   letter-spacing: 0.22em;
 }
+
+
+/* Textos secundarios */
 
 .about-block p,
 .about-item p {
@@ -207,16 +441,10 @@ a {
 
 
 /* ========================================
-   RESPONSIVE
+   ABOUT RESPONSIVE
 ======================================== */
 
 @media (max-width: 900px) {
-
-  .site-header,
-  .site-footer {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
 
   .about-main {
     width: calc(100% - 40px);
