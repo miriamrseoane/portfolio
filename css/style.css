@@ -274,10 +274,10 @@ a {
 .about-bio p {
   margin: 0 0 32px;
 
-  font-size: 25px;
+  font-size: 20px;
   line-height: 1.32;
   font-weight: 200;
-  letter-spacing: -0.02em;
+  letter-spacing: 0em;
 }
 
 
@@ -286,7 +286,7 @@ a {
 .about-block h2 {
   margin: 0 0 26px;
 
-  font-size: 13px;
+  font-size: 10px;
   line-height: 1;
   font-weight: 400;
   letter-spacing: 0.22em;
@@ -299,7 +299,7 @@ a {
 .about-item p {
   margin: 0;
 
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.4;
   font-weight: 400;
 }
