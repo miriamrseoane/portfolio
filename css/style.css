@@ -288,7 +288,7 @@ a {
 
   font-size: 10px;
   line-height: 1;
-  font-weight: 400;
+  font-weight: 200;
   letter-spacing: 0.22em;
 }
 
@@ -299,9 +299,9 @@ a {
 .about-item p {
   margin: 0;
 
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: 200;
 }
 
 
