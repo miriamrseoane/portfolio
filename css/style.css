@@ -234,6 +234,25 @@ a {
 }
 
 
+/* =========================================
+   ABOUT — TYPOGRAPHY
+========================================= */
+
+/*
+   Todos los textos corridos de About
+   comparten exactamente el mismo tratamiento.
+*/
+
+.about-bio p,
+.about-block p,
+.about-item p {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 300;
+  letter-spacing: 0em;
+}
+
+
 /* Bio */
 
 .about-bio {
@@ -242,11 +261,6 @@ a {
 
 .about-bio p {
   margin: 0 0 32px;
-
-  font-size: 14px;
-  line-height: 1.32;
-  font-weight: 300;
-  letter-spacing: 0em;
 }
 
 
@@ -267,10 +281,6 @@ a {
 .about-block p,
 .about-item p {
   margin: 0;
-
-  font-size: 14px;
-  line-height: 1.4;
-  font-weight: 300;
 }
 
 
