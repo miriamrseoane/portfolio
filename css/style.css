@@ -14,12 +14,11 @@ body {
   width: 100%;
   min-height: 100%;
 
-font-family: "neue-haas-unica", sans-serif;
-font-weight: 300;
-font-style: normal;
-letter-spacing: 0,0em;
+  font-family: "neue-haas-unica", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: 0em;
 
-   
   color: #111;
   background: #f3f3f0;
 
@@ -28,6 +27,7 @@ letter-spacing: 0,0em;
 
 body {
   min-height: 100vh;
+  overflow: hidden;
 }
 
 a {
@@ -65,6 +65,8 @@ a {
   font-weight: 300;
 
   color: #111;
+
+  transition: color 0.7s ease;
 }
 
 
@@ -100,6 +102,20 @@ a {
   font-weight: 300;
 
   color: #111;
+
+  transition: color 0.7s ease;
+}
+
+
+/* =========================================
+   LIGHT TEXT STATE
+========================================= */
+
+.logo.is-light,
+.site-header nav.is-light,
+.gallery-credit.is-light,
+.gallery-counter.is-light {
+  color: #fff;
 }
 
 
@@ -123,10 +139,10 @@ a {
 
 
 /* =========================================
-   STACK GALLERY
+   BACKGROUND GALLERY
 ========================================= */
 
-.stack-gallery {
+.background-gallery {
   position: absolute;
 
   inset: 0;
@@ -152,80 +168,31 @@ a {
 .gallery-image {
   position: absolute;
 
-  top: 50%;
-  left: 50%;
+  inset: 0;
 
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
 
-  max-width: calc(100vw - 180px);
-  max-height: calc(100vh - 180px);
-
-  object-fit: contain;
-
-  transform:
-    translate(-50%, -50%)
-    scale(0.985);
+  object-fit: cover;
+  object-position: center;
 
   opacity: 0;
 
   pointer-events: none;
   user-select: none;
 
-  transition:
-    opacity 0.7s ease,
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.2s ease;
 
   border-radius: 0;
 }
 
 
 /* =========================================
-   VISIBLE IMAGES
+   ACTIVE IMAGE
 ========================================= */
 
-.gallery-image.visible {
+.gallery-image.active {
   opacity: 1;
-
-  transform:
-    translate(-50%, -50%)
-    scale(1);
-}
-
-
-/* =========================================
-   IMAGE ENTER ANIMATION
-========================================= */
-
-.gallery-image.entering {
-  animation:
-    imageEnter
-    0.8s
-    cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-
-/* =========================================
-   IMAGE ENTER KEYFRAMES
-========================================= */
-
-@keyframes imageEnter {
-
-  from {
-    opacity: 0;
-
-    transform:
-      translate(-50%, -50%)
-      scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translate(-50%, -50%)
-      scale(1);
-  }
 }
 
 
@@ -369,14 +336,6 @@ a {
   .gallery-counter,
   .site-footer p {
     font-size: 13px;
-  }
-
-
-  /* Home */
-
-  .gallery-image {
-    max-width: calc(100vw - 48px);
-    max-height: calc(100vh - 160px);
   }
 
 
