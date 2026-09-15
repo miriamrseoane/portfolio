@@ -15,10 +15,11 @@ body {
   min-height: 100%;
 
 font-family: "neue-haas-unica", sans-serif;
-font-weight: 400;
+font-weight: 300;
 font-style: normal;
-letter-spacing: 0,02em;
+letter-spacing: 0,0em;
 
+   
   color: #111;
   background: #f3f3f0;
 
@@ -61,7 +62,7 @@ a {
   margin: 0;
 
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 300;
 
   color: #111;
 }
@@ -96,7 +97,7 @@ a {
   margin: 0;
 
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 300;
 
   color: #111;
 }
@@ -277,7 +278,7 @@ a {
 
   font-size: 20px;
   line-height: 1.32;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 0em;
 }
 
@@ -289,7 +290,7 @@ a {
 
   font-size: 10px;
   line-height: 1;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 0.22em;
 }
 
@@ -302,7 +303,7 @@ a {
 
   font-size: 14px;
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 
