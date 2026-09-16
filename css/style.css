@@ -238,7 +238,7 @@ a {
   grid-template-columns:
     1fr
     520px
-    320px;
+    max-content;
 
   column-gap: 60px;
 
@@ -295,8 +295,8 @@ a {
 .about-contact {
   grid-column: 3;
 
-  width: 100%;
-  justify-self: stretch;
+  justify-self: end;
+  width: max-content;
 
   text-align: left;
 
@@ -352,6 +352,10 @@ a {
   .about-copy {
     max-width: 100%;
     margin-bottom: 32px;
+  }
+
+  .about-contact {
+    width: auto;
   }
 
   .about-copy p,
