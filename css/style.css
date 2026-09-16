@@ -17,7 +17,7 @@ body {
   font-family: "neue-haas-unica", sans-serif;
   font-weight: 300;
   font-style: normal;
-  letter-spacing: 0em;
+  letter-spacing: 0;
 
   color: #111;
   background: #f3f3f0;
@@ -71,6 +71,30 @@ a {
 
 
 /* =========================================
+   ABOUT BUTTON
+========================================= */
+
+.about-toggle {
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+
+  color: inherit;
+
+  cursor: pointer;
+}
+
+
+/* =========================================
    FOOTER
 ========================================= */
 
@@ -114,7 +138,9 @@ a {
 .logo.is-light,
 .site-header nav.is-light,
 .gallery-credit.is-light,
-.gallery-counter.is-light {
+.gallery-counter.is-light,
+.about-copy.is-light,
+.about-contact.is-light {
   color: #fff;
 }
 
@@ -197,135 +223,96 @@ a {
 
 
 /* =========================================
-   ABOUT
+   ABOUT OVERLAY
 ========================================= */
 
-.about-page {
-  min-height: 100vh;
+.about-overlay {
+  position: fixed;
 
-  background: #f4f4f1;
-  color: #111;
+  inset: 0;
 
-  overflow-y: auto;
-}
+  width: 100%;
+  height: 100%;
 
-
-/* Footer About */
-
-.about-page .site-footer {
-  background: #f4f4f1;
-}
-
-
-/* Layout principal */
-
-.about-main {
-  width: calc(100% - 296px);
-  max-width: 1144px;
-
-  margin: 0 auto;
+  z-index: 900;
 
   display: grid;
-  grid-template-columns: 1.9fr 1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    minmax(360px, 520px)
+    minmax(220px, 1fr);
+
   column-gap: 80px;
 
-  padding-top: 210px;
-  padding-bottom: 130px;
+  padding:
+    24px
+    32px;
+
+  align-items: start;
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  color: #111;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    color 0.7s ease;
 }
 
 
-/* =========================================
-   ABOUT — TYPOGRAPHY
-========================================= */
+/* About visible */
 
-/*
-   Todos los textos corridos de About
-   comparten exactamente el mismo tratamiento.
-*/
+.about-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
 
-.about-bio p,
-.about-block p,
-.about-item p {
+
+/* About text */
+
+.about-copy {
+  grid-column: 2;
+
+  max-width: 520px;
+
+  transition: color 0.7s ease;
+}
+
+.about-copy p {
+  margin: 0 0 18px;
+
   font-size: 14px;
   line-height: 1.4;
   font-weight: 300;
-  letter-spacing: 0em;
 }
 
 
-/* Bio */
+/* Contact */
 
-.about-bio {
-  max-width: 400px;
+.about-contact {
+  grid-column: 3;
+
+  justify-self: start;
+
+  transition: color 0.7s ease;
 }
 
-.about-bio p {
-  margin: 0 0 32px;
-}
-
-
-/* Títulos pequeños */
-
-.about-block h2 {
-  margin: 0 0 26px;
-
-  font-size: 10px;
-  line-height: 1;
-  font-weight: 300;
-  letter-spacing: 0.22em;
-}
-
-
-/* Textos secundarios */
-
-.about-block p,
-.about-item p {
+.about-contact p {
   margin: 0;
+
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 300;
 }
 
-
-/* Docencia */
-
-.about-item {
-  margin-bottom: 23px;
-}
-
-
-/* Otros */
-
-.other-block {
-  margin-top: 71px;
-}
-
-
-/* Columna derecha */
-
-.about-right {
-  width: 100%;
-}
-
-.about-image {
-  width: 100%;
-  margin-bottom: 93px;
-}
-
-.about-image img {
-  display: block;
-
-  width: 100%;
-  height: auto;
-}
-
-
-/* Follow */
-
-.follow-block a {
+.about-contact a {
   color: inherit;
   text-decoration: none;
-}
-
-.follow-block a:hover {
-  text-decoration: underline;
 }
 
 
@@ -351,35 +338,22 @@ a {
 
   /* About */
 
-  .about-main {
-    width: calc(100% - 48px);
+  .about-overlay {
+    display: block;
 
-    grid-template-columns: 1fr;
-    row-gap: 60px;
-
-    padding-top: 140px;
-    padding-bottom: 120px;
+    padding:
+      80px
+      24px
+      80px;
   }
 
-  .about-bio {
+  .about-copy {
     max-width: 100%;
+    margin-bottom: 32px;
   }
 
-  .about-bio p {
-    font-size: 23px;
-  }
-
-  .about-info,
-  .about-right {
-    width: 100%;
-  }
-
-  .other-block {
-    margin-top: 50px;
-  }
-
-  .about-image {
-    max-width: 400px;
-    margin-bottom: 60px;
+  .about-copy p,
+  .about-contact p {
+    font-size: 13px;
   }
 }
