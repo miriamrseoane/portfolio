@@ -9,8 +9,15 @@ const nav = document.querySelector(".site-header nav");
 const credit = document.querySelector(".gallery-credit");
 const counter = document.querySelector(".gallery-counter");
 
+const aboutToggle = document.querySelector("#aboutToggle");
+const aboutView = document.querySelector("#aboutView");
+const aboutCopy = document.querySelector(".about-copy");
+const aboutContact = document.querySelector(".about-contact");
+
 let currentIndex = 0;
 let interval;
+
+let aboutOpen = false;
 
 const imageDuration = 4000;
 const brightnessThreshold = 135;
@@ -57,27 +64,37 @@ function getRegionBrightness(image, element) {
       return null;
     }
 
-    const canvas = document.createElement("canvas");
+    const canvas =
+      document.createElement("canvas");
 
-    const context = canvas.getContext("2d", {
-      willReadFrequently: true
-    });
+    const context =
+      canvas.getContext("2d", {
+        willReadFrequently: true
+      });
 
-    const rect = element.getBoundingClientRect();
+    const rect =
+      element.getBoundingClientRect();
 
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
+    const viewportWidth =
+      window.innerWidth;
 
-    const imageWidth = image.naturalWidth;
-    const imageHeight = image.naturalHeight;
+    const viewportHeight =
+      window.innerHeight;
+
+    const imageWidth =
+      image.naturalWidth;
+
+    const imageHeight =
+      image.naturalHeight;
 
 
     /* object-fit: cover */
 
-    const scale = Math.max(
-      viewportWidth / imageWidth,
-      viewportHeight / imageHeight
-    );
+    const scale =
+      Math.max(
+        viewportWidth / imageWidth,
+        viewportHeight / imageHeight
+      );
 
     const renderedWidth =
       imageWidth * scale;
@@ -97,10 +114,16 @@ function getRegionBrightness(image, element) {
     const padding = 12;
 
     const screenX =
-      Math.max(0, rect.left - padding);
+      Math.max(
+        0,
+        rect.left - padding
+      );
 
     const screenY =
-      Math.max(0, rect.top - padding);
+      Math.max(
+        0,
+        rect.top - padding
+      );
 
     const regionWidth =
       Math.min(
@@ -133,8 +156,11 @@ function getRegionBrightness(image, element) {
     const sampleWidth = 50;
     const sampleHeight = 30;
 
-    canvas.width = sampleWidth;
-    canvas.height = sampleHeight;
+    canvas.width =
+      sampleWidth;
+
+    canvas.height =
+      sampleHeight;
 
 
     context.drawImage(
@@ -152,35 +178,50 @@ function getRegionBrightness(image, element) {
     );
 
 
-    const pixels = context.getImageData(
-      0,
-      0,
-      sampleWidth,
-      sampleHeight
-    ).data;
+    const pixels =
+      context.getImageData(
+        0,
+        0,
+        sampleWidth,
+        sampleHeight
+      ).data;
 
 
     let totalBrightness = 0;
     let pixelCount = 0;
 
 
-    for (let i = 0; i < pixels.length; i += 4) {
+    for (
+      let i = 0;
+      i < pixels.length;
+      i += 4
+    ) {
 
-      const red = pixels[i];
-      const green = pixels[i + 1];
-      const blue = pixels[i + 2];
+      const red =
+        pixels[i];
+
+      const green =
+        pixels[i + 1];
+
+      const blue =
+        pixels[i + 2];
 
       const brightness =
         red * 0.299 +
         green * 0.587 +
         blue * 0.114;
 
-      totalBrightness += brightness;
+      totalBrightness +=
+        brightness;
+
       pixelCount++;
     }
 
 
-    return totalBrightness / pixelCount;
+    return (
+      totalBrightness /
+      pixelCount
+    );
 
   } catch (error) {
 
@@ -198,9 +239,15 @@ function getRegionBrightness(image, element) {
    UPDATE ELEMENT COLOR
 ========================================= */
 
-function updateElementColor(element, brightness) {
+function updateElementColor(
+  element,
+  brightness
+) {
 
-  if (!element || brightness === null) {
+  if (
+    !element ||
+    brightness === null
+  ) {
     return;
   }
 
@@ -217,11 +264,15 @@ function updateElementColor(element, brightness) {
 
 function updateInterfaceColors(image) {
 
-  if (!image.complete || !image.naturalWidth) {
+  if (
+    !image.complete ||
+    !image.naturalWidth
+  ) {
 
     image.addEventListener(
       "load",
-      () => updateInterfaceColors(image),
+      () =>
+        updateInterfaceColors(image),
       { once: true }
     );
 
@@ -231,23 +282,64 @@ function updateInterfaceColors(image) {
 
   updateElementColor(
     logo,
-    getRegionBrightness(image, logo)
+    getRegionBrightness(
+      image,
+      logo
+    )
   );
+
 
   updateElementColor(
     nav,
-    getRegionBrightness(image, nav)
+    getRegionBrightness(
+      image,
+      nav
+    )
   );
+
 
   updateElementColor(
     credit,
-    getRegionBrightness(image, credit)
+    getRegionBrightness(
+      image,
+      credit
+    )
   );
+
 
   updateElementColor(
     counter,
-    getRegionBrightness(image, counter)
+    getRegionBrightness(
+      image,
+      counter
+    )
   );
+
+
+  /* About */
+
+  if (aboutCopy) {
+
+    updateElementColor(
+      aboutCopy,
+      getRegionBrightness(
+        image,
+        aboutCopy
+      )
+    );
+  }
+
+
+  if (aboutContact) {
+
+    updateElementColor(
+      aboutContact,
+      getRegionBrightness(
+        image,
+        aboutContact
+      )
+    );
+  }
 }
 
 
@@ -257,14 +349,16 @@ function updateInterfaceColors(image) {
 
 function showImage(index) {
 
-  images.forEach((image, imageIndex) => {
+  images.forEach(
+    (image, imageIndex) => {
 
-    image.classList.toggle(
-      "active",
-      imageIndex === index
-    );
+      image.classList.toggle(
+        "active",
+        imageIndex === index
+      );
 
-  });
+    }
+  );
 
 
   updateInfo();
@@ -287,9 +381,12 @@ function showImage(index) {
 function showNextImage() {
 
   currentIndex =
-    (currentIndex + 1) % images.length;
+    (currentIndex + 1) %
+    images.length;
 
-  showImage(currentIndex);
+  showImage(
+    currentIndex
+  );
 }
 
 
@@ -301,11 +398,74 @@ function startAutoplay() {
 
   clearInterval(interval);
 
-  interval = setInterval(() => {
+  interval =
+    setInterval(
+      () => {
 
-    showNextImage();
+        showNextImage();
 
-  }, imageDuration);
+      },
+      imageDuration
+    );
+}
+
+
+/* =========================================
+   ABOUT TOGGLE
+========================================= */
+
+if (
+  aboutToggle &&
+  aboutView
+) {
+
+  aboutToggle.addEventListener(
+    "click",
+    () => {
+
+      aboutOpen =
+        !aboutOpen;
+
+
+      aboutView.classList.toggle(
+        "is-active",
+        aboutOpen
+      );
+
+
+      aboutView.setAttribute(
+        "aria-hidden",
+        String(!aboutOpen)
+      );
+
+
+      aboutToggle.textContent =
+        aboutOpen
+          ? "Work"
+          : "About";
+
+
+      /* Recalcular colores porque
+         About acaba de aparecer */
+
+      if (
+        aboutOpen &&
+        images.length > 0
+      ) {
+
+        requestAnimationFrame(
+          () => {
+
+            updateInterfaceColors(
+              images[currentIndex]
+            );
+
+          }
+        );
+      }
+
+    }
+  );
 }
 
 
@@ -315,7 +475,10 @@ function startAutoplay() {
 
 if (images.length > 0) {
 
-  showImage(currentIndex);
+  showImage(
+    currentIndex
+  );
+
 
   if (images.length > 1) {
     startAutoplay();
@@ -327,15 +490,21 @@ if (images.length > 0) {
    CLICK TO ADVANCE
 ========================================= */
 
-if (gallery && images.length > 1) {
+if (
+  gallery &&
+  images.length > 1
+) {
 
-  gallery.addEventListener("click", () => {
+  gallery.addEventListener(
+    "click",
+    () => {
 
-    showNextImage();
+      showNextImage();
 
-    startAutoplay();
+      startAutoplay();
 
-  });
+    }
+  );
 }
 
 
@@ -343,13 +512,16 @@ if (gallery && images.length > 1) {
    RECALCULATE ON RESIZE
 ========================================= */
 
-window.addEventListener("resize", () => {
+window.addEventListener(
+  "resize",
+  () => {
 
-  if (images.length > 0) {
+    if (images.length > 0) {
 
-    updateInterfaceColors(
-      images[currentIndex]
-    );
+      updateInterfaceColors(
+        images[currentIndex]
+      );
 
+    }
   }
-});
+);
