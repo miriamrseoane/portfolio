@@ -300,6 +300,8 @@ a {
 
   text-align: left;
 
+  pointer-events: auto;
+
   transition: color 0.7s ease;
 }
 
