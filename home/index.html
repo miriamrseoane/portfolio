@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -10,17 +11,22 @@
 
   <title>Miriam R. Seoane | Design</title>
 
-  <link rel="stylesheet" href="https://use.typekit.net/lut7oqt.css">
+  <link
+    rel="stylesheet"
+    href="https://use.typekit.net/lut7oqt.css"
+  >
 
   <link
     rel="stylesheet"
-    href="../css/style.css?v=5"
+    href="../css/style.css?v=6"
   />
 </head>
 
 <body>
 
-  <!-- HEADER -->
+  <!-- =========================================
+       HEADER
+  ========================================== -->
 
   <header class="site-header">
 
@@ -32,17 +38,28 @@
     </a>
 
     <nav>
-      <a href="../about/">
+      <button
+        class="about-toggle"
+        id="aboutToggle"
+        type="button"
+      >
         About
-      </a>
+      </button>
     </nav>
 
   </header>
 
 
-  <!-- HOME -->
+  <!-- =========================================
+       HOME
+  ========================================== -->
 
   <main class="home">
+
+
+    <!-- =========================================
+         SLIDER
+    ========================================== -->
 
     <div
       class="background-gallery"
@@ -88,15 +105,70 @@
         class="gallery-image"
         src="../img/project-06.jpg"
         alt="Project 06"
-        data-credit="Dentro de la ballena - Geroge Orwell · [2026]"
+        data-credit="Dentro de la ballena - George Orwell · [2026]"
       >
 
     </div>
 
+
+    <!-- =========================================
+         ABOUT OVERLAY
+    ========================================== -->
+
+    <section
+      class="about-overlay"
+      id="aboutView"
+      aria-hidden="true"
+    >
+
+      <div class="about-copy">
+
+        <p>
+         I am an Art Director and Graphic Designer, based in Barcelona. My projects focus on both digital and print design. 
+I am also a lecturer at LCI Barcelona and UOC, where I teach graphic design students about  editorial design.
+        </p>
+
+      </div>
+
+
+      <div class="about-contact">
+
+        <p>
+          <a href="mailto:xxxx@gmail.com">
+            Mail: xxxx@gmail.com
+          </a>
+        </p>
+
+        <p>
+          <a
+            href="https://www.instagram.com/miriamrseoane"
+            target="_blank"
+            rel="noopener"
+          >
+            IG: @miriamrseoane
+          </a>
+        </p>
+
+        <p>
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener"
+          >
+            LinkedIn: Miriam R. Seoane
+          </a>
+        </p>
+
+      </div>
+
+    </section>
+
   </main>
 
 
-  <!-- FOOTER -->
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
 
   <footer class="site-footer">
 
@@ -111,9 +183,11 @@
   </footer>
 
 
-  <!-- JAVASCRIPT -->
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================== -->
 
-  <script src="../js/slider.js?v=5"></script>
+  <script src="../js/slider.js?v=6"></script>
 
 </body>
 
