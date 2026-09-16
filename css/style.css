@@ -237,16 +237,14 @@ a {
 
   grid-template-columns:
     1fr
-    minmax(420px, 560px)
-    minmax(220px, 320px);
+    520px
+    260px;
 
   column-gap: 60px;
 
   padding:
     24px
-    32px
-    24px
-    112px;
+    32px;
 
   align-items: start;
 
@@ -276,7 +274,7 @@ a {
 .about-copy {
   grid-column: 2;
 
-  max-width: 560px;
+  max-width: 520px;
 
   transition: color 0.7s ease;
 }
