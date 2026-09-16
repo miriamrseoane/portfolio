@@ -5,18 +5,17 @@ const images = Array.from(
 );
 
 const logo = document.querySelector(".logo");
-const nav = document.querySelector(".site-header nav");
+const aboutToggle = document.querySelector("#aboutToggle");
+
 const credit = document.querySelector(".gallery-credit");
 const counter = document.querySelector(".gallery-counter");
 
-const aboutToggle = document.querySelector("#aboutToggle");
 const aboutView = document.querySelector("#aboutView");
 const aboutCopy = document.querySelector(".about-copy");
 const aboutContact = document.querySelector(".about-contact");
 
 let currentIndex = 0;
 let interval;
-
 let aboutOpen = false;
 
 const imageDuration = 4000;
@@ -60,7 +59,11 @@ function getRegionBrightness(image, element) {
 
   try {
 
-    if (!image.complete || !image.naturalWidth || !element) {
+    if (
+      !image.complete ||
+      !image.naturalWidth ||
+      !element
+    ) {
       return null;
     }
 
@@ -290,10 +293,10 @@ function updateInterfaceColors(image) {
 
 
   updateElementColor(
-    nav,
+    aboutToggle,
     getRegionBrightness(
       image,
-      nav
+      aboutToggle
     )
   );
 
@@ -315,8 +318,6 @@ function updateInterfaceColors(image) {
     )
   );
 
-
-  /* About */
 
   if (aboutCopy) {
 
@@ -439,14 +440,11 @@ if (
       );
 
 
-      aboutToggle.textContent =
-        aboutOpen
-          ? "Work"
-          : "About";
+      aboutToggle.setAttribute(
+        "aria-expanded",
+        String(aboutOpen)
+      );
 
-
-      /* Recalcular colores porque
-         About acaba de aparecer */
 
       if (
         aboutOpen &&
