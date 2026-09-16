@@ -51,14 +51,16 @@ a {
   padding: 24px 32px;
 
   z-index: 1000;
+}
 
+.site-header-left {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 100px;
 }
 
 .logo,
-.site-header nav {
+.about-toggle {
   margin: 0;
 
   font-size: 14px;
@@ -75,20 +77,15 @@ a {
 ========================================= */
 
 .about-toggle {
-  margin: 0;
   padding: 0;
 
   border: 0;
   background: transparent;
 
   font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
   font-style: inherit;
   line-height: inherit;
   letter-spacing: inherit;
-
-  color: inherit;
 
   cursor: pointer;
 }
@@ -136,7 +133,7 @@ a {
 ========================================= */
 
 .logo.is-light,
-.site-header nav.is-light,
+.about-toggle.is-light,
 .gallery-credit.is-light,
 .gallery-counter.is-light,
 .about-copy.is-light,
@@ -240,10 +237,10 @@ a {
 
   grid-template-columns:
     1fr
-    minmax(360px, 520px)
-    minmax(220px, 1fr);
+    minmax(420px, 560px)
+    minmax(220px, 320px);
 
-  column-gap: 80px;
+  column-gap: 60px;
 
   padding:
     24px
@@ -264,27 +261,26 @@ a {
     color 0.7s ease;
 }
 
-
-/* About visible */
-
 .about-overlay.is-active {
   opacity: 1;
   visibility: visible;
 }
 
 
-/* About text */
+/* =========================================
+   ABOUT TEXT
+========================================= */
 
 .about-copy {
   grid-column: 2;
 
-  max-width: 520px;
+  max-width: 560px;
 
   transition: color 0.7s ease;
 }
 
 .about-copy p {
-  margin: 0 0 18px;
+  margin: 0;
 
   font-size: 14px;
   line-height: 1.4;
@@ -292,7 +288,9 @@ a {
 }
 
 
-/* Contact */
+/* =========================================
+   CONTACT
+========================================= */
 
 .about-contact {
   grid-column: 3;
@@ -327,16 +325,17 @@ a {
     padding: 20px 24px;
   }
 
+  .site-header-left {
+    gap: 48px;
+  }
+
   .logo,
-  .site-header nav,
+  .about-toggle,
   .gallery-credit,
   .gallery-counter,
   .site-footer p {
     font-size: 13px;
   }
-
-
-  /* About */
 
   .about-overlay {
     display: block;
