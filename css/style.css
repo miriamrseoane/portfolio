@@ -238,7 +238,7 @@ a {
   grid-template-columns:
     1fr
     520px
-    260px;
+    320px;
 
   column-gap: 60px;
 
@@ -295,7 +295,10 @@ a {
 .about-contact {
   grid-column: 3;
 
-  justify-self: start;
+  width: 100%;
+  justify-self: stretch;
+
+  text-align: left;
 
   transition: color 0.7s ease;
 }
