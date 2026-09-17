@@ -51,12 +51,16 @@ a {
   padding: 24px 32px;
 
   z-index: 1000;
+
+   pointer-events: none;
 }
 
 .site-header-left {
   display: flex;
   align-items: center;
   gap: 100px;
+   
+pointer-events: auto;
 }
 
 .logo,
