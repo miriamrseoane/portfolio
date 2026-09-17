@@ -347,7 +347,7 @@ archive-page .site-header {
 }
 
 .archive-about-overlay {
-  background: #fff;
+  background: transparent;
   color: #111;
 }
 
@@ -359,7 +359,7 @@ archive-page .site-header {
   width: 100%;
 
   padding:
-    90px
+    220px
     32px
     80px;
 }
