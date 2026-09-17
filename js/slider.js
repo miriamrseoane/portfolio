@@ -1,3 +1,5 @@
+const archiveLink = document.querySelector(".archive-link");
+
 const gallery = document.querySelector(".background-gallery");
 
 const images = Array.from(
@@ -281,6 +283,14 @@ function updateInterfaceColors(image) {
 
     return;
   }
+
+  updateElementColor(
+  archiveLink,
+  getRegionBrightness(
+    image,
+    archiveLink
+  )
+);
 
 
   updateElementColor(
