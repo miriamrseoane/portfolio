@@ -422,7 +422,7 @@ a {
   grid-template-columns:
     1fr
     260px
-    80px;
+    max-content;
 
   column-gap: 40px;
 
@@ -448,6 +448,7 @@ a {
 
 .archive-project-year {
   text-align: right;
+  white-space: nowrap;
 }
 
 
@@ -620,7 +621,7 @@ a {
   .archive-project-header {
     grid-template-columns:
       1fr
-      auto;
+      max-content;
 
     column-gap: 20px;
 
@@ -633,6 +634,7 @@ a {
 
   .archive-project-year {
     text-align: right;
+    white-space: nowrap;
   }
 
   .archive-gallery {
