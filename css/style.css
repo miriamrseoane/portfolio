@@ -52,19 +52,20 @@ a {
 
   z-index: 1000;
 
-   pointer-events: none;
+  pointer-events: none;
 }
 
 .site-header-left {
   display: flex;
   align-items: center;
   gap: 100px;
-   
-pointer-events: auto;
+
+  pointer-events: auto;
 }
 
 .logo,
-.about-toggle {
+.about-toggle,
+.archive-home-link {
   margin: 0;
 
   font-size: 14px;
@@ -326,6 +327,202 @@ pointer-events: auto;
   text-decoration: underline;
 }
 
+
+/* =========================================
+   ARCHIVE PAGE
+========================================= */
+
+.archive-page {
+  min-height: 100vh;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background: #f3f3f0;
+}
+
+
+/* =========================================
+   ARCHIVE MAIN
+========================================= */
+
+.archive-main {
+  width: 100%;
+
+  padding:
+    90px
+    32px
+    80px;
+}
+
+
+/* =========================================
+   ARCHIVE LIST
+========================================= */
+
+.archive-list {
+  width: 100%;
+}
+
+
+/* =========================================
+   ARCHIVE PROJECT
+========================================= */
+
+.archive-project {
+  width: 100%;
+
+  border-top: 1px solid rgba(17, 17, 17, 0.25);
+}
+
+.archive-project:last-child {
+  border-bottom: 1px solid rgba(17, 17, 17, 0.25);
+}
+
+
+/* =========================================
+   ARCHIVE PROJECT HEADER
+========================================= */
+
+.archive-project-header {
+  width: 100%;
+
+  margin: 0;
+  padding:
+    12px
+    0;
+
+  border: 0;
+
+  background: transparent;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    260px
+    80px;
+
+  column-gap: 40px;
+
+  align-items: center;
+
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 300;
+
+  color: #111;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.archive-project-title,
+.archive-project-category,
+.archive-project-year {
+  min-width: 0;
+}
+
+.archive-project-year {
+  text-align: right;
+}
+
+
+/* =========================================
+   ARCHIVE PROJECT CONTENT
+========================================= */
+
+.archive-project-content {
+  display: grid;
+
+  grid-template-rows: 0fr;
+
+  transition:
+    grid-template-rows 0.45s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.archive-project-inner {
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+.archive-project.is-open
+.archive-project-content {
+  grid-template-rows: 1fr;
+}
+
+
+/* =========================================
+   ARCHIVE HORIZONTAL GALLERY
+========================================= */
+
+.archive-gallery {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  width: calc(100vw - 32px);
+
+  margin-right: -32px;
+
+  padding:
+    12px
+    32px
+    32px
+    0;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  overscroll-behavior-x: contain;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+
+  cursor: ew-resize;
+
+  scrollbar-width: none;
+}
+
+.archive-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.archive-gallery img {
+  display: block;
+
+  flex: 0 0 auto;
+
+  width: auto;
+  height: 70vh;
+
+  max-height: 760px;
+
+  object-fit: contain;
+
+  scroll-snap-align: start;
+
+  user-select: none;
+}
+
+
+/* =========================================
+   ARCHIVE LINK HOVER
+========================================= */
+
+.archive-home-link:hover,
+.archive-project-header:hover
+.archive-project-title {
+  text-decoration: underline;
+}
+
+
 /* =========================================
    RESPONSIVE
 ========================================= */
@@ -343,11 +540,17 @@ pointer-events: auto;
 
   .logo,
   .about-toggle,
+  .archive-home-link,
   .gallery-credit,
   .gallery-counter,
   .site-footer p {
     font-size: 13px;
   }
+
+
+  /* =========================================
+     ABOUT MOBILE
+  ========================================= */
 
   .about-overlay {
     display: block;
@@ -370,5 +573,54 @@ pointer-events: auto;
   .about-copy p,
   .about-contact p {
     font-size: 13px;
+  }
+
+
+  /* =========================================
+     ARCHIVE MOBILE
+  ========================================= */
+
+  .archive-main {
+    padding:
+      80px
+      24px
+      60px;
+  }
+
+  .archive-project-header {
+    grid-template-columns:
+      1fr
+      auto;
+
+    column-gap: 20px;
+
+    font-size: 13px;
+  }
+
+  .archive-project-category {
+    display: none;
+  }
+
+  .archive-project-year {
+    text-align: right;
+  }
+
+  .archive-gallery {
+    width: calc(100vw - 24px);
+
+    margin-right: -24px;
+
+    padding:
+      12px
+      24px
+      24px
+      0;
+
+    gap: 8px;
+  }
+
+  .archive-gallery img {
+    height: 55vh;
+    max-height: 560px;
   }
 }
