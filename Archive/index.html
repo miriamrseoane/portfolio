@@ -18,7 +18,7 @@
 
   <link
     rel="stylesheet"
-    href="../css/style.css?v=8"
+    href="../css/style.css?v=9"
   />
 </head>
 
@@ -39,16 +39,74 @@
         Miriam R. Seoane
       </a>
 
-      <a
-        href="../home/"
-        class="archive-home-link"
+      <button
+        class="about-toggle"
+        id="aboutToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="aboutView"
       >
-        Home
-      </a>
+        About
+      </button>
 
     </div>
 
   </header>
+
+
+  <!-- =========================================
+       ABOUT OVERLAY
+  ========================================== -->
+
+  <section
+    class="about-overlay archive-about-overlay"
+    id="aboutView"
+    aria-hidden="true"
+  >
+
+    <div class="about-copy">
+
+      <p>
+        I am an Art Director and Graphic Designer, based in Barcelona.
+        My projects focus on both digital and print design.
+        I am also a lecturer at LCI Barcelona and UOC, where I teach
+        graphic design students about editorial design.
+      </p>
+
+    </div>
+
+
+    <div class="about-contact">
+
+      <p>
+        <a href="mailto:xxxx@gmail.com">
+          Mail: xxxx@gmail.com
+        </a>
+      </p>
+
+      <p>
+        <a
+          href="https://www.instagram.com/miriamrseoane"
+          target="_blank"
+          rel="noopener"
+        >
+          IG: @miriamrseoane
+        </a>
+      </p>
+
+      <p>
+        <a
+          href="#"
+          target="_blank"
+          rel="noopener"
+        >
+          LinkedIn: Miriam R. Seoane
+        </a>
+      </p>
+
+    </div>
+
+  </section>
 
 
   <!-- =========================================
@@ -58,11 +116,6 @@
   <main class="archive-main">
 
     <div class="archive-list">
-
-
-      <!-- =========================================
-           PROJECT 01
-      ========================================== -->
 
       <article class="archive-project">
 
@@ -113,17 +166,12 @@
 
       </article>
 
-
     </div>
 
   </main>
 
 
-  <!-- =========================================
-       JAVASCRIPT
-  ========================================== -->
-
-  <script src="../js/archive.js?v=1"></script>
+  <script src="../js/archive.js?v=2"></script>
 
 </body>
 
