@@ -503,15 +503,16 @@ archive-page .site-header {
   display: none;
 }
 
-archive-gallery img {
+.archive-gallery img {
   display: block;
 
   flex: 0 0 auto;
 
   width: auto;
-  height: 55vh;
+  height: auto;
 
-  max-height: 620px;
+  max-width: 420px;
+  max-height: 55vh;
 
   object-fit: contain;
 
@@ -628,8 +629,11 @@ archive-gallery img {
     gap: 8px;
   }
 
+  @media (max-width: 900px) {
+
   .archive-gallery img {
-    height: 45vh;
-    max-height: 560px;
+    max-width: 80vw;
+    max-height: 45vh;
   }
+}
 }
