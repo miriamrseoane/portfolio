@@ -338,9 +338,18 @@ a {
   overflow-x: hidden;
   overflow-y: auto;
 
-  background: #f3f3f0;
+  background: #fff;
+  color: #111;
 }
 
+archive-page .site-header {
+  background: transparent;
+}
+
+.archive-about-overlay {
+  background: #fff;
+  color: #111;
+}
 
 /* =========================================
    ARCHIVE MAIN
