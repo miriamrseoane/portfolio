@@ -526,9 +526,7 @@ archive-page .site-header {
    ARCHIVE LINK HOVER
 ========================================= */
 
-.archive-home-link:hover,
-.archive-project-header:hover
-.archive-project-title {
+.archive-home-link:hover {
   text-decoration: underline;
 }
 
