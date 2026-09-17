@@ -58,7 +58,7 @@ a {
 .site-header-left {
   display: flex;
   align-items: center;
-  gap: 100px;
+  gap: 0;
 
   pointer-events: auto;
 }
@@ -75,6 +75,15 @@ a {
   color: #111;
 
   transition: color 0.7s ease;
+}
+
+.archive-link,
+.archive-home-link {
+  margin-left: 100px;
+}
+
+.about-toggle {
+  margin-left: 50px;
 }
 
 
@@ -546,7 +555,16 @@ a {
   }
 
   .site-header-left {
-    gap: 48px;
+    gap: 0;
+  }
+
+  .archive-link,
+  .archive-home-link {
+    margin-left: 48px;
+  }
+
+  .about-toggle {
+    margin-left: 24px;
   }
 
   .logo,
