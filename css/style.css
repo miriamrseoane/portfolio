@@ -64,6 +64,7 @@ a {
 }
 
 .logo,
+.archive-link,
 .about-toggle,
 .archive-home-link {
   margin: 0;
@@ -138,6 +139,7 @@ a {
 ========================================= */
 
 .logo.is-light,
+.archive-link.is-light,
 .about-toggle.is-light,
 .gallery-credit.is-light,
 .gallery-counter.is-light,
@@ -342,7 +344,7 @@ a {
   color: #111;
 }
 
-archive-page .site-header {
+.archive-page .site-header {
   background: transparent;
 }
 
@@ -350,6 +352,7 @@ archive-page .site-header {
   background: transparent;
   color: #111;
 }
+
 
 /* =========================================
    ARCHIVE MAIN
@@ -547,6 +550,7 @@ archive-page .site-header {
   }
 
   .logo,
+  .archive-link,
   .about-toggle,
   .archive-home-link,
   .gallery-credit,
@@ -627,11 +631,8 @@ archive-page .site-header {
     gap: 8px;
   }
 
-  @media (max-width: 900px) {
-
   .archive-gallery img {
     max-width: 80vw;
     max-height: 45vh;
   }
-}
 }
