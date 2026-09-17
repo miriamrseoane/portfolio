@@ -420,9 +420,9 @@ a {
   display: grid;
 
   grid-template-columns:
-    1fr
+    minmax(0, 1fr)
     260px
-    max-content;
+    110px;
 
   column-gap: 40px;
 
