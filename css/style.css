@@ -650,8 +650,9 @@ a {
     gap: 8px;
   }
 
-  .archive-gallery img {
-    max-width: 80vw;
-    max-height: 45vh;
-  }
+ .archive-gallery img {
+  height: 320px;
+  max-width: none;
+  max-height: 45vh;
+}
 }
