@@ -522,13 +522,12 @@ a {
   flex: 0 0 auto;
 
   width: auto;
-  height: auto;
+  height: 420px;
 
-  max-width: 420px;
+  max-width: none;
   max-height: 55vh;
 
   object-fit: contain;
-
   scroll-snap-align: start;
 
   user-select: none;
