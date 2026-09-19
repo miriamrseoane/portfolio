@@ -531,6 +531,13 @@ a {
   scroll-snap-align: start;
 
   user-select: none;
+
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.archive-gallery img:hover {
+  filter: grayscale(0%);
 }
 
 
@@ -654,5 +661,7 @@ a {
   height: 320px;
   max-width: none;
   max-height: 45vh;
+  filter: grayscale(0%);
+}
 }
 }
