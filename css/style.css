@@ -1,3 +1,4 @@
+
 /* =========================================
    RESET
 ========================================= */
@@ -14,11 +15,11 @@ body {
   width: 100%;
   min-height: 100%;
 
-   font-family: "darkmode-mono-off", sans-serif;
-   font-weight: 400;
-   font-style: normal;
-   font-size: 12px;
-   letter-spacing: 0;
+  font-family: "darkmode-mono-off", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
 
   color: #111;
   background: #fff;
@@ -70,8 +71,8 @@ a {
 .archive-home-link {
   margin: 0;
 
-
-  font-weight: 300;
+  font-size: 12px;
+  font-weight: 400;
 
   color: #111;
 
@@ -99,9 +100,13 @@ a {
   background: transparent;
 
   font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
   font-style: inherit;
   line-height: inherit;
   letter-spacing: inherit;
+
+  color: inherit;
 
   cursor: pointer;
 }
@@ -135,8 +140,8 @@ a {
 .site-footer p {
   margin: 0;
 
-
-  font-weight: 300;
+  font-size: 12px;
+  font-weight: 400;
 
   color: #111;
 
@@ -299,9 +304,9 @@ a {
 .about-copy p {
   margin: 0;
 
- 
+  font-size: 12px;
   line-height: 1.4;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 
@@ -325,9 +330,9 @@ a {
 .about-contact p {
   margin: 0;
 
-  
+  font-size: 12px;
   line-height: 1.4;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .about-contact a {
@@ -410,12 +415,9 @@ a {
   width: 100%;
 
   margin: 0;
-  padding:
-    12px
-    0;
+  padding: 12px 0;
 
   border: 0;
-
   background: transparent;
 
   display: grid;
@@ -426,18 +428,18 @@ a {
     110px;
 
   column-gap: 40px;
-
   align-items: center;
 
   font-family: inherit;
- 
+  font-size: inherit;
+  font-weight: 400;
+  font-style: inherit;
   line-height: 1.2;
-  font-weight: 300;
+  letter-spacing: inherit;
 
   color: #111;
 
   text-align: left;
-
   cursor: pointer;
 }
 
@@ -469,7 +471,6 @@ a {
 
 .archive-project-inner {
   min-height: 0;
-
   overflow: hidden;
 }
 
@@ -485,13 +486,11 @@ a {
 
 .archive-gallery {
   display: flex;
-
   align-items: flex-start;
 
   gap: 12px;
 
   width: calc(100vw - 32px);
-
   margin-right: -32px;
 
   padding:
@@ -582,7 +581,7 @@ a {
   .gallery-credit,
   .gallery-counter,
   .site-footer p {
-    
+    font-size: 12px;
   }
 
 
@@ -610,7 +609,7 @@ a {
 
   .about-copy p,
   .about-contact p {
-  
+    font-size: 12px;
   }
 
 
@@ -627,12 +626,12 @@ a {
 
   .archive-project-header {
     grid-template-columns:
-      1fr
+      minmax(0, 1fr)
       max-content;
 
     column-gap: 20px;
 
- 
+    font-size: 12px;
   }
 
   .archive-project-category {
@@ -646,7 +645,6 @@ a {
 
   .archive-gallery {
     width: calc(100vw - 24px);
-
     margin-right: -24px;
 
     padding:
@@ -658,11 +656,12 @@ a {
     gap: 8px;
   }
 
- .archive-gallery img {
-  height: 320px;
-  max-width: none;
-  max-height: 45vh;
-  filter: grayscale(0%);
-}
-}
+  .archive-gallery img {
+    height: 320px;
+
+    max-width: none;
+    max-height: 45vh;
+
+    filter: grayscale(0%);
+  }
 }
