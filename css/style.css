@@ -17,6 +17,7 @@ body {
    font-family: "darkmode-mono-off", sans-serif;
    font-weight: 400;
    font-style: normal;
+   font-size: 12px;
    letter-spacing: 0;
 
   color: #111;
@@ -69,7 +70,7 @@ a {
 .archive-home-link {
   margin: 0;
 
-  font-size: 14px;
+
   font-weight: 300;
 
   color: #111;
@@ -134,7 +135,7 @@ a {
 .site-footer p {
   margin: 0;
 
-  font-size: 14px;
+
   font-weight: 300;
 
   color: #111;
@@ -298,7 +299,7 @@ a {
 .about-copy p {
   margin: 0;
 
-  font-size: 14px;
+ 
   line-height: 1.4;
   font-weight: 300;
 }
@@ -324,7 +325,7 @@ a {
 .about-contact p {
   margin: 0;
 
-  font-size: 14px;
+  
   line-height: 1.4;
   font-weight: 300;
 }
@@ -429,7 +430,7 @@ a {
   align-items: center;
 
   font-family: inherit;
-  font-size: 14px;
+ 
   line-height: 1.2;
   font-weight: 300;
 
@@ -581,7 +582,7 @@ a {
   .gallery-credit,
   .gallery-counter,
   .site-footer p {
-    font-size: 13px;
+    
   }
 
 
@@ -609,7 +610,7 @@ a {
 
   .about-copy p,
   .about-contact p {
-    font-size: 13px;
+  
   }
 
 
@@ -631,7 +632,7 @@ a {
 
     column-gap: 20px;
 
-    font-size: 13px;
+ 
   }
 
   .archive-project-category {
