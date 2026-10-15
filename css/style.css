@@ -684,7 +684,7 @@ a {
     width: 100%;
     height: auto;
 
-    padding: 0 24px;
+    padding: 80px 24px 0;
 
     max-height: 0;
     overflow: hidden;
