@@ -1,3 +1,675 @@
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+
+  font-family: "darkmode-mono-off", sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: 0;
+
+  color: #111;
+  background: #fff;
+  border-radius: 0;
+}
+
+body {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  padding: 24px 32px;
+  z-index: 1000;
+
+  pointer-events: none;
+}
+
+.site-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  pointer-events: auto;
+}
+
+.logo,
+.archive-link,
+.about-toggle,
+.archive-home-link {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 300;
+  color: #111;
+  transition: color 0.7s ease;
+}
+
+.archive-link,
+.archive-home-link {
+  margin-left: 100px;
+}
+
+.about-toggle {
+  margin-left: 50px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+
+  color: inherit;
+  cursor: pointer;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  padding: 24px 32px;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  pointer-events: none;
+}
+
+.gallery-credit,
+.gallery-counter,
+.site-footer p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 300;
+  color: #111;
+  transition: color 0.7s ease;
+}
+
+
+/* =========================================
+   LIGHT TEXT STATE
+========================================= */
+
+.logo.is-light,
+.archive-link.is-light,
+.about-toggle.is-light,
+.gallery-credit.is-light,
+.gallery-counter.is-light,
+.about-copy.is-light,
+.about-contact.is-light {
+  color: #fff;
+}
+
+
+/* =========================================
+   HOME
+========================================= */
+
+.home {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+
+/* =========================================
+   BACKGROUND GALLERY
+========================================= */
+
+.background-gallery {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.background-gallery picture {
+  display: contents;
+}
+
+
+/* =========================================
+   GALLERY IMAGES
+========================================= */
+
+.gallery-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  opacity: 0;
+
+  pointer-events: none;
+  user-select: none;
+
+  transition: opacity 1.2s ease;
+  border-radius: 0;
+}
+
+.gallery-image.active {
+  opacity: 1;
+}
+
+
+/* =========================================
+   ABOUT OVERLAY — DESKTOP
+========================================= */
+
+.about-overlay {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 900;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    520px
+    max-content;
+
+  column-gap: 60px;
+
+  padding: 24px 32px;
+  align-items: start;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  color: #111;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    color 0.7s ease;
+}
+
+.about-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+
+/* =========================================
+   ABOUT TEXT
+========================================= */
+
+.about-copy {
+  grid-column: 2;
+  max-width: 520px;
+  transition: color 0.7s ease;
+}
+
+.about-copy p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+
+/* =========================================
+   CONTACT
+========================================= */
+
+.about-contact {
+  grid-column: 3;
+  justify-self: end;
+
+  width: max-content;
+  text-align: left;
+
+  pointer-events: auto;
+  transition: color 0.7s ease;
+}
+
+.about-contact p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+.about-contact a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.about-contact a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   ARCHIVE PAGE
+========================================= */
+
+.archive-page {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background: #fff;
+  color: #111;
+}
+
+.archive-page .site-header {
+  background: transparent;
+}
+
+.archive-about-overlay {
+  background: transparent;
+  color: #111;
+}
+
+
+/* =========================================
+   ARCHIVE MAIN
+========================================= */
+
+.archive-main {
+  width: 100%;
+  padding: 220px 32px 80px;
+}
+
+.archive-list {
+  width: 100%;
+}
+
+
+/* =========================================
+   ARCHIVE PROJECT
+========================================= */
+
+.archive-project {
+  width: 100%;
+  border-top: 1px solid rgba(17, 17, 17, 0.25);
+}
+
+.archive-project:last-child {
+  border-bottom: 1px solid rgba(17, 17, 17, 0.25);
+}
+
+
+/* =========================================
+   ARCHIVE PROJECT HEADER
+========================================= */
+
+.archive-project-header {
+  width: 100%;
+  margin: 0;
+  padding: 12px 0;
+
+  border: 0;
+  background: transparent;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    260px
+    110px;
+
+  column-gap: 40px;
+  align-items: center;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 300;
+  font-style: inherit;
+  line-height: 1.2;
+  letter-spacing: inherit;
+
+  color: #111;
+  text-align: left;
+  cursor: pointer;
+}
+
+.archive-project-title,
+.archive-project-category,
+.archive-project-year {
+  min-width: 0;
+}
+
+.archive-project-year {
+  text-align: right;
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   ARCHIVE PROJECT CONTENT
+========================================= */
+
+.archive-project-content {
+  display: grid;
+  grid-template-rows: 0fr;
+
+  transition:
+    grid-template-rows 0.45s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.archive-project-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.archive-project.is-open .archive-project-content {
+  grid-template-rows: 1fr;
+}
+
+
+/* =========================================
+   ARCHIVE HORIZONTAL GALLERY
+========================================= */
+
+.archive-gallery {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  width: calc(100vw - 32px);
+  margin-right: -32px;
+  padding: 12px 32px 32px 0;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+
+  cursor: ew-resize;
+  scrollbar-width: none;
+}
+
+.archive-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.archive-gallery img {
+  display: block;
+  flex: 0 0 auto;
+
+  width: auto;
+  height: 380px;
+
+  max-width: none;
+  max-height: 55vh;
+
+  object-fit: contain;
+  scroll-snap-align: start;
+  user-select: none;
+
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.archive-gallery img:hover {
+  filter: grayscale(0%);
+}
+
+.archive-home-link:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   RESPONSIVE — SHARED
+========================================= */
+
+@media (max-width: 900px) {
+
+  .site-header,
+  .site-footer {
+    padding: 20px 24px;
+  }
+
+  .archive-link,
+  .archive-home-link {
+    margin-left: 48px;
+  }
+
+  .about-toggle {
+    margin-left: 24px;
+  }
+
+  .logo,
+  .archive-link,
+  .about-toggle,
+  .archive-home-link,
+  .gallery-credit,
+  .gallery-counter,
+  .site-footer p {
+    font-size: 12px;
+  }
+
+  .about-overlay {
+    display: block;
+    padding: 80px 24px 80px;
+  }
+
+  .about-copy {
+    max-width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .about-contact {
+    width: auto;
+  }
+
+  .about-copy p,
+  .about-contact p {
+    font-size: 12px;
+  }
+
+  .archive-main {
+    padding: 80px 24px 60px;
+  }
+
+  .archive-project-header {
+    grid-template-columns:
+      minmax(0, 1fr)
+      max-content;
+
+    column-gap: 20px;
+    font-size: 12px;
+  }
+
+  .archive-project-category {
+    display: none;
+  }
+
+  .archive-project-year {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .archive-gallery {
+    width: calc(100vw - 24px);
+    margin-right: -24px;
+    padding: 12px 24px 24px 0;
+    gap: 8px;
+  }
+
+  .archive-gallery img {
+    height: 320px;
+    max-width: none;
+    max-height: 45vh;
+    filter: grayscale(0%);
+  }
+}
+
+
+/* =========================================
+   ARCHIVE — ABOUT MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .archive-page .archive-about-overlay {
+    position: relative;
+    inset: auto;
+
+    display: block;
+    width: 100%;
+    height: auto;
+
+    padding: 80px 24px 0;
+
+    max-height: 0;
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+      max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  .archive-page .archive-about-overlay.is-active {
+    max-height: var(--archive-about-height, 500px);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .archive-page .about-copy {
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .archive-page .about-contact {
+    width: 100%;
+    text-align: left;
+  }
+
+  .archive-page .archive-about-overlay::after {
+    content: "";
+    display: block;
+    height: 40px;
+  }
+
+  .archive-page .archive-main {
+    padding-top: 80px;
+  }
+}
+
+
+/* =========================================
+   HOME — ABOUT MOBILE
+   Only affects the Home at 768px or less
+========================================= */
+
+@media (max-width: 768px) {
+
+  .home-page {
+    --home-about-bg: #fff;
+    --home-about-fg: #111;
+  }
+
+  /* Allow the page to grow when About opens */
+
+  .home-page.home-about-open {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .home-page .home {
+    display: flex;
+    flex-direction: column;
+
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    overflow: visible;
+  }
+
+  /* About participates in the document flow */
+
+  .home-page .about-overlay {
+    position: relative;
+    inset: auto;
+
+    display: block;
+    flex: 0 0 auto;
+
+    width: 100%;
+    height: auto;
+
+    padding: 0 24px;
+
+    max-height: 0;
+    overflow: hidden;
+
+    opacity: 0;
     visibility: hidden;
 
     pointer-events: none;
