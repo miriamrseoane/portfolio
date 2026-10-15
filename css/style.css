@@ -665,3 +665,73 @@ a {
     filter: grayscale(0%);
   }
 }
+
+
+/* =========================================
+   ARCHIVE — ABOUT MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+  /* About ocupa espacio real cuando está abierto */
+
+  .archive-page .archive-about-overlay {
+    position: relative;
+    inset: auto;
+
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    padding: 0 24px;
+
+    max-height: 0;
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+      max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  /* About abierto */
+
+  .archive-page .archive-about-overlay.is-active {
+    max-height: var(--archive-about-height, 500px);
+
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Bio */
+
+  .archive-page .about-copy {
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
+  /* Contacto */
+
+  .archive-page .about-contact {
+    width: 100%;
+    text-align: left;
+  }
+
+  /* Espacio interior del About */
+
+  .archive-page .archive-about-overlay::after {
+    content: "";
+    display: block;
+    height: 40px;
+  }
+
+  /* La lista mantiene su margen habitual */
+
+  .archive-page .archive-main {
+    padding-top: 80px;
+  }
+}
