@@ -135,50 +135,80 @@ archiveProjects.forEach(
 );
 
 
+
 /* =========================================
    HORIZONTAL SCROLL WITH MOUSE WHEEL
+   DESKTOP ONLY
 ========================================= */
 
-const archiveGalleries =
-  document.querySelectorAll(
-    ".archive-gallery"
+const archiveGalleries = document.querySelectorAll(
+  ".archive-gallery"
+);
+
+archiveGalleries.forEach((gallery) => {
+
+  gallery.addEventListener(
+    "wheel",
+    (event) => {
+
+      // Solo en desktop
+      if (window.innerWidth <= 900) {
+        return;
+      }
+
+      // Respetar el scroll horizontal del trackpad
+      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
+        return;
+      }
+
+      // Comprobar si existe desplazamiento horizontal
+      const maxScroll =
+        gallery.scrollWidth - gallery.clientWidth;
+
+      if (maxScroll <= 0) {
+        return;
+      }
+
+      // Normalizar la rueda (píxeles, líneas o páginas)
+      const multiplier =
+        event.deltaMode === 1
+          ? 16
+          : event.deltaMode === 2
+            ? gallery.clientHeight
+            : 1;
+
+      const delta = event.deltaY * multiplier;
+
+      const atStart = gallery.scrollLeft <= 1;
+      const atEnd = gallery.scrollLeft >= maxScroll - 1;
+
+      // Permitir scroll vertical al llegar a los extremos
+      if (
+        (delta < 0 && atStart) ||
+        (delta > 0 && atEnd)
+      ) {
+        return;
+      }
+
+      // Convertir scroll vertical en horizontal
+      event.preventDefault();
+
+      gallery.scrollLeft = Math.max(
+        0,
+        Math.min(
+          maxScroll,
+          gallery.scrollLeft + delta
+        )
+      );
+
+    },
+    {
+      passive: false
+    }
   );
 
-archiveGalleries.forEach(
-  (gallery) => {
+});
 
-    gallery.addEventListener(
-      "wheel",
-      (event) => {
-
-        const canScrollHorizontally =
-          gallery.scrollWidth >
-          gallery.clientWidth;
-
-        if (!canScrollHorizontally) {
-          return;
-        }
-
-        if (
-          Math.abs(event.deltaX) >
-          Math.abs(event.deltaY)
-        ) {
-          return;
-        }
-
-        event.preventDefault();
-
-        gallery.scrollLeft +=
-          event.deltaY;
-
-      },
-      {
-        passive: false
-      }
-    );
-
-  }
-);
 
 
 window.addEventListener("resize", updateAboutHeight);
