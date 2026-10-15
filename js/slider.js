@@ -1,5 +1,9 @@
-const archiveLink = document.querySelector(".archive-link");
 
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const archiveLink = document.querySelector(".archive-link");
 const gallery = document.querySelector(".background-gallery");
 
 const images = Array.from(
@@ -16,8 +20,10 @@ const aboutView = document.querySelector("#aboutView");
 const aboutCopy = document.querySelector(".about-copy");
 const aboutContact = document.querySelector(".about-contact");
 
+const mobileQuery = window.matchMedia("(max-width: 768px)");
+
 let currentIndex = 0;
-let interval;
+let interval = null;
 let aboutOpen = false;
 
 const imageDuration = 4000;
@@ -25,11 +31,27 @@ const brightnessThreshold = 135;
 
 
 /* =========================================
-   FORMAT NUMBER
+   HELPERS
 ========================================= */
+
+function isMobile() {
+  return mobileQuery.matches;
+}
 
 function formatNumber(number) {
   return String(number).padStart(2, "0");
+}
+
+function currentImage() {
+  return images[currentIndex] || null;
+}
+
+function imageReady(image) {
+  return Boolean(
+    image &&
+    image.complete &&
+    image.naturalWidth > 0
+  );
 }
 
 
@@ -39,11 +61,12 @@ function formatNumber(number) {
 
 function updateInfo() {
 
-  const currentImage = images[currentIndex];
+  const image = currentImage();
+
+  if (!image) return;
 
   if (credit) {
-    credit.textContent =
-      currentImage.dataset.credit || "";
+    credit.textContent = image.dataset.credit || "";
   }
 
   if (counter) {
@@ -54,207 +77,153 @@ function updateInfo() {
 
 
 /* =========================================
-   REGION BRIGHTNESS
+   IMAGE SAMPLING
 ========================================= */
 
-function getRegionBrightness(image, element) {
+function sampleImage(image, element) {
+
+  if (!imageReady(image) || !element) {
+    return null;
+  }
 
   try {
 
-    if (
-      !image.complete ||
-      !image.naturalWidth ||
-      !element
-    ) {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d", {
+      willReadFrequently: true
+    });
+
+    if (!context) return null;
+
+    const imageRect = image.getBoundingClientRect();
+    const rect = element.getBoundingClientRect();
+
+    if (!imageRect.width || !imageRect.height) {
       return null;
     }
 
-    const canvas =
-      document.createElement("canvas");
+    const naturalWidth = image.naturalWidth;
+    const naturalHeight = image.naturalHeight;
 
-    const context =
-      canvas.getContext("2d", {
-        willReadFrequently: true
-      });
+    /* Match object-fit: cover */
 
-    const rect =
-      element.getBoundingClientRect();
+    const scale = Math.max(
+      imageRect.width / naturalWidth,
+      imageRect.height / naturalHeight
+    );
 
-    const viewportWidth =
-      window.innerWidth;
-
-    const viewportHeight =
-      window.innerHeight;
-
-    const imageWidth =
-      image.naturalWidth;
-
-    const imageHeight =
-      image.naturalHeight;
-
-
-    /* object-fit: cover */
-
-    const scale =
-      Math.max(
-        viewportWidth / imageWidth,
-        viewportHeight / imageHeight
-      );
-
-    const renderedWidth =
-      imageWidth * scale;
-
-    const renderedHeight =
-      imageHeight * scale;
+    const renderedWidth = naturalWidth * scale;
+    const renderedHeight = naturalHeight * scale;
 
     const offsetX =
-      (viewportWidth - renderedWidth) / 2;
+      (imageRect.width - renderedWidth) / 2;
 
     const offsetY =
-      (viewportHeight - renderedHeight) / 2;
-
-
-    /* Área alrededor del texto */
+      (imageRect.height - renderedHeight) / 2;
 
     const padding = 12;
 
-    const screenX =
-      Math.max(
-        0,
-        rect.left - padding
-      );
+    const left = Math.max(
+      imageRect.left,
+      rect.left - padding
+    );
 
-    const screenY =
-      Math.max(
-        0,
-        rect.top - padding
-      );
+    const top = Math.max(
+      imageRect.top,
+      rect.top - padding
+    );
 
-    const regionWidth =
-      Math.min(
-        viewportWidth - screenX,
-        rect.width + padding * 2
-      );
+    const right = Math.min(
+      imageRect.right,
+      rect.right + padding
+    );
 
-    const regionHeight =
-      Math.min(
-        viewportHeight - screenY,
-        rect.height + padding * 2
-      );
+    const bottom = Math.min(
+      imageRect.bottom,
+      rect.bottom + padding
+    );
 
-
-    /* Convertir a coordenadas de imagen */
+    if (right <= left || bottom <= top) {
+      return null;
+    }
 
     const sourceX =
-      (screenX - offsetX) / scale;
+      (left - imageRect.left - offsetX) / scale;
 
     const sourceY =
-      (screenY - offsetY) / scale;
+      (top - imageRect.top - offsetY) / scale;
 
-    const sourceWidth =
-      regionWidth / scale;
+    const sourceWidth = (right - left) / scale;
+    const sourceHeight = (bottom - top) / scale;
 
-    const sourceHeight =
-      regionHeight / scale;
-
-
-    const sampleWidth = 50;
-    const sampleHeight = 30;
-
-    canvas.width =
-      sampleWidth;
-
-    canvas.height =
-      sampleHeight;
-
+    canvas.width = 32;
+    canvas.height = 24;
 
     context.drawImage(
       image,
-
       sourceX,
       sourceY,
       sourceWidth,
       sourceHeight,
-
       0,
       0,
-      sampleWidth,
-      sampleHeight
+      canvas.width,
+      canvas.height
     );
 
+    const pixels = context.getImageData(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    ).data;
 
-    const pixels =
-      context.getImageData(
-        0,
-        0,
-        sampleWidth,
-        sampleHeight
-      ).data;
+    let red = 0;
+    let green = 0;
+    let blue = 0;
+    let count = 0;
 
-
-    let totalBrightness = 0;
-    let pixelCount = 0;
-
-
-    for (
-      let i = 0;
-      i < pixels.length;
-      i += 4
-    ) {
-
-      const red =
-        pixels[i];
-
-      const green =
-        pixels[i + 1];
-
-      const blue =
-        pixels[i + 2];
-
-      const brightness =
-        red * 0.299 +
-        green * 0.587 +
-        blue * 0.114;
-
-      totalBrightness +=
-        brightness;
-
-      pixelCount++;
+    for (let i = 0; i < pixels.length; i += 4) {
+      red += pixels[i];
+      green += pixels[i + 1];
+      blue += pixels[i + 2];
+      count++;
     }
 
-
-    return (
-      totalBrightness /
-      pixelCount
-    );
+    return {
+      r: Math.round(red / count),
+      g: Math.round(green / count),
+      b: Math.round(blue / count)
+    };
 
   } catch (error) {
 
-    console.warn(
-      "Brightness detection failed:",
-      error
-    );
-
+    console.warn("Image sampling failed:", error);
     return null;
   }
 }
 
 
 /* =========================================
-   UPDATE ELEMENT COLOR
+   BRIGHTNESS AND CONTRAST
 ========================================= */
 
-function updateElementColor(
-  element,
-  brightness
-) {
+function getBrightness(color) {
 
-  if (
-    !element ||
-    brightness === null
-  ) {
-    return;
-  }
+  if (!color) return null;
+
+  return (
+    color.r * 0.299 +
+    color.g * 0.587 +
+    color.b * 0.114
+  );
+}
+
+function updateElementColor(element, color) {
+
+  if (!element || !color) return;
+
+  const brightness = getBrightness(color);
 
   element.classList.toggle(
     "is-light",
@@ -269,88 +238,188 @@ function updateElementColor(
 
 function updateInterfaceColors(image) {
 
-  if (
-    !image.complete ||
-    !image.naturalWidth
-  ) {
+  if (!imageReady(image)) return;
 
-    image.addEventListener(
-      "load",
-      () =>
-        updateInterfaceColors(image),
-      { once: true }
-    );
-
-    return;
-  }
-
-  updateElementColor(
-  archiveLink,
-  getRegionBrightness(
-    image,
-    archiveLink
-  )
-);
-
-
-  updateElementColor(
+  const elements = [
     logo,
-    getRegionBrightness(
-      image,
-      logo
-    )
-  );
-
-
-  updateElementColor(
+    archiveLink,
     aboutToggle,
-    getRegionBrightness(
-      image,
-      aboutToggle
-    )
-  );
-
-
-  updateElementColor(
     credit,
-    getRegionBrightness(
-      image,
-      credit
-    )
-  );
+    counter
+  ];
 
+  elements.forEach((element) => {
+    updateElementColor(
+      element,
+      sampleImage(image, element)
+    );
+  });
 
-  updateElementColor(
-    counter,
-    getRegionBrightness(
-      image,
-      counter
-    )
-  );
-
-
-  if (aboutCopy) {
+  if (!isMobile()) {
 
     updateElementColor(
       aboutCopy,
-      getRegionBrightness(
-        image,
-        aboutCopy
-      )
+      sampleImage(image, aboutCopy)
     );
-  }
-
-
-  if (aboutContact) {
 
     updateElementColor(
       aboutContact,
-      getRegionBrightness(
-        image,
-        aboutContact
-      )
+      sampleImage(image, aboutContact)
     );
   }
+}
+
+
+/* =========================================
+   MOBILE BACKGROUND COLOR
+========================================= */
+
+function getRepresentativeColor(image) {
+
+  if (!imageReady(image)) {
+    return { r: 255, g: 255, b: 255 };
+  }
+
+  try {
+
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d", {
+      willReadFrequently: true
+    });
+
+    if (!context) {
+      return { r: 255, g: 255, b: 255 };
+    }
+
+    canvas.width = 24;
+    canvas.height = 24;
+
+    /* Sample the image as it appears with cover */
+
+    const width = image.naturalWidth;
+    const height = image.naturalHeight;
+
+    const rect = image.getBoundingClientRect();
+
+    const targetRatio = rect.width / rect.height;
+    const sourceRatio = width / height;
+
+    let sx = 0;
+    let sy = 0;
+    let sw = width;
+    let sh = height;
+
+    if (sourceRatio > targetRatio) {
+      sw = height * targetRatio;
+      sx = (width - sw) / 2;
+    } else {
+      sh = width / targetRatio;
+      sy = (height - sh) / 2;
+    }
+
+    context.drawImage(
+      image,
+      sx, sy, sw, sh,
+      0, 0, 24, 24
+    );
+
+    const pixels = context.getImageData(
+      0, 0, 24, 24
+    ).data;
+
+    let red = 0;
+    let green = 0;
+    let blue = 0;
+    let count = 0;
+
+    for (let i = 0; i < pixels.length; i += 4) {
+      red += pixels[i];
+      green += pixels[i + 1];
+      blue += pixels[i + 2];
+      count++;
+    }
+
+    return {
+      r: Math.round(red / count),
+      g: Math.round(green / count),
+      b: Math.round(blue / count)
+    };
+
+  } catch (error) {
+
+    console.warn("Background color detection failed:", error);
+
+    return { r: 255, g: 255, b: 255 };
+  }
+}
+
+
+/* =========================================
+   APPLY MOBILE ABOUT COLOR
+========================================= */
+
+function updateMobileAboutColor() {
+
+  if (!isMobile() || !aboutOpen) return;
+
+  const image = currentImage();
+
+  if (!imageReady(image)) return;
+
+  const color = getRepresentativeColor(image);
+
+  const background =
+    `rgb(${color.r}, ${color.g}, ${color.b})`;
+
+  const foreground =
+    getBrightness(color) < brightnessThreshold
+      ? "#fff"
+      : "#111";
+
+  document.body.style.setProperty(
+    "--home-about-bg",
+    background
+  );
+
+  document.body.style.setProperty(
+    "--home-about-fg",
+    foreground
+  );
+
+  aboutCopy?.classList.remove("is-light");
+  aboutContact?.classList.remove("is-light");
+}
+
+
+/* =========================================
+   MOBILE ABOUT HEIGHT
+========================================= */
+
+function updateMobileAboutHeight() {
+
+  if (!aboutView || !isMobile()) return;
+
+  const copy = aboutCopy;
+  const contact = aboutContact;
+
+  if (!copy || !contact) return;
+
+  const copyHeight = copy.getBoundingClientRect().height;
+  const contactHeight = contact.getBoundingClientRect().height;
+
+  /* Header + bio + gap + contact + bottom space */
+
+  const totalHeight =
+    80 +
+    copyHeight +
+    24 +
+    contactHeight +
+    40;
+
+  aboutView.style.setProperty(
+    "--home-about-height",
+    `${Math.ceil(totalHeight + 2)}px`
+  );
 }
 
 
@@ -360,28 +429,25 @@ function updateInterfaceColors(image) {
 
 function showImage(index) {
 
-  images.forEach(
-    (image, imageIndex) => {
+  if (!images.length) return;
 
-      image.classList.toggle(
-        "active",
-        imageIndex === index
-      );
+  currentIndex = index;
 
-    }
-  );
-
+  images.forEach((image, imageIndex) => {
+    image.classList.toggle(
+      "active",
+      imageIndex === currentIndex
+    );
+  });
 
   updateInfo();
 
+  const image = currentImage();
 
-  const currentImage =
-    images[index];
-
-
-  updateInterfaceColors(
-    currentImage
-  );
+  if (imageReady(image)) {
+    updateInterfaceColors(image);
+    updateMobileAboutColor();
+  }
 }
 
 
@@ -391,13 +457,12 @@ function showImage(index) {
 
 function showNextImage() {
 
-  currentIndex =
-    (currentIndex + 1) %
-    images.length;
+  if (images.length < 2) return;
 
-  showImage(
-    currentIndex
-  );
+  currentIndex =
+    (currentIndex + 1) % images.length;
+
+  showImage(currentIndex);
 }
 
 
@@ -405,19 +470,22 @@ function showNextImage() {
    AUTOPLAY
 ========================================= */
 
+function stopAutoplay() {
+  clearInterval(interval);
+  interval = null;
+}
+
 function startAutoplay() {
 
-  clearInterval(interval);
+  stopAutoplay();
 
-  interval =
-    setInterval(
-      () => {
+  if (images.length < 2) return;
 
-        showNextImage();
+  if (isMobile() && aboutOpen) return;
 
-      },
-      imageDuration
-    );
+  interval = setInterval(() => {
+    showNextImage();
+  }, imageDuration);
 }
 
 
@@ -425,55 +493,125 @@ function startAutoplay() {
    ABOUT TOGGLE
 ========================================= */
 
-if (
-  aboutToggle &&
-  aboutView
-) {
+function toggleAbout() {
 
-  aboutToggle.addEventListener(
-    "click",
-    () => {
+  if (!aboutView) return;
 
-      aboutOpen =
-        !aboutOpen;
+  aboutOpen = !aboutOpen;
 
+  if (aboutOpen && isMobile()) {
 
-      aboutView.classList.toggle(
-        "is-active",
-        aboutOpen
-      );
+    /* Freeze the active image */
 
+    stopAutoplay();
 
-      aboutView.setAttribute(
-        "aria-hidden",
-        String(!aboutOpen)
-      );
+    /* Prepare color and height before opening */
 
+    updateMobileAboutHeight();
+    updateMobileAboutColor();
+  }
 
-      aboutToggle.setAttribute(
-        "aria-expanded",
-        String(aboutOpen)
-      );
-
-
-      if (
-        aboutOpen &&
-        images.length > 0
-      ) {
-
-        requestAnimationFrame(
-          () => {
-
-            updateInterfaceColors(
-              images[currentIndex]
-            );
-
-          }
-        );
-      }
-
-    }
+  aboutView.classList.toggle(
+    "is-active",
+    aboutOpen
   );
+
+  aboutView.setAttribute(
+    "aria-hidden",
+    String(!aboutOpen)
+  );
+
+  aboutToggle.setAttribute(
+    "aria-expanded",
+    String(aboutOpen)
+  );
+
+  document.body.classList.toggle(
+    "home-about-open",
+    aboutOpen
+  );
+
+  if (!aboutOpen) {
+    startAutoplay();
+  }
+
+  requestAnimationFrame(() => {
+
+    const image = currentImage();
+
+    if (imageReady(image)) {
+      updateInterfaceColors(image);
+    }
+  });
+}
+
+if (aboutToggle && aboutView) {
+  aboutToggle.addEventListener("click", toggleAbout);
+}
+
+
+/* =========================================
+   CLICK TO ADVANCE
+========================================= */
+
+if (gallery && images.length > 1) {
+
+  gallery.addEventListener("click", () => {
+
+    if (isMobile() && aboutOpen) return;
+
+    showNextImage();
+    startAutoplay();
+  });
+}
+
+
+/* =========================================
+   IMAGE LOAD EVENTS
+========================================= */
+
+images.forEach((image) => {
+
+  image.addEventListener("load", () => {
+
+    if (image !== currentImage()) return;
+
+    updateInterfaceColors(image);
+    updateMobileAboutColor();
+  });
+});
+
+
+/* =========================================
+   RESIZE AND RESPONSIVE
+========================================= */
+
+function handleResize() {
+
+  if (isMobile()) {
+    updateMobileAboutHeight();
+    updateMobileAboutColor();
+  } else {
+    document.body.style.removeProperty("--home-about-bg");
+    document.body.style.removeProperty("--home-about-fg");
+  }
+
+  const image = currentImage();
+
+  if (imageReady(image)) {
+    updateInterfaceColors(image);
+  }
+
+  startAutoplay();
+}
+
+window.addEventListener("resize", handleResize);
+
+if (document.fonts) {
+  document.fonts.ready.then(() => {
+    updateMobileAboutHeight();
+    updateMobileAboutColor();
+  });
 }
 
 
@@ -482,54 +620,6 @@ if (
 ========================================= */
 
 if (images.length > 0) {
-
-  showImage(
-    currentIndex
-  );
-
-
-  if (images.length > 1) {
-    startAutoplay();
-  }
+  showImage(0);
+  startAutoplay();
 }
-
-
-/* =========================================
-   CLICK TO ADVANCE
-========================================= */
-
-if (
-  gallery &&
-  images.length > 1
-) {
-
-  gallery.addEventListener(
-    "click",
-    () => {
-
-      showNextImage();
-
-      startAutoplay();
-
-    }
-  );
-}
-
-
-/* =========================================
-   RECALCULATE ON RESIZE
-========================================= */
-
-window.addEventListener(
-  "resize",
-  () => {
-
-    if (images.length > 0) {
-
-      updateInterfaceColors(
-        images[currentIndex]
-      );
-
-    }
-  }
-);
