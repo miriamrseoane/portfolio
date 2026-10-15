@@ -546,6 +546,25 @@ if (aboutToggle && aboutView) {
   aboutToggle.addEventListener("click", toggleAbout);
 }
 
+/* =========================================
+   CLOSE ABOUT ON AREA CLICK
+========================================= */
+
+if (aboutView) {
+
+  aboutView.addEventListener("click", (event) => {
+
+    if (!aboutOpen) return;
+
+    // Los enlaces siguen funcionando normalmente
+    if (event.target.closest("a")) return;
+
+    toggleAbout();
+
+  });
+
+}
+
 
 /* =========================================
    CLICK TO ADVANCE
