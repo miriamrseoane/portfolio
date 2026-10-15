@@ -360,21 +360,19 @@ function getRepresentativeColor(image) {
 
 function updateMobileAboutColor() {
 
-  if (!isMobile() || !aboutOpen) return;
+   if (!isMobile() || !aboutOpen) return;
 
   const image = currentImage();
 
   if (!imageReady(image)) return;
 
   const color = getRepresentativeColor(image);
+  const brightness = getBrightness(color);
 
-  const background =
-    `rgb(${color.r}, ${color.g}, ${color.b})`;
+  const isDark = brightness < brightnessThreshold;
 
-  const foreground =
-    getBrightness(color) < brightnessThreshold
-      ? "#fff"
-      : "#111";
+  const background = isDark ? "#000" : "#fff";
+  const foreground = isDark ? "#fff" : "#111";
 
   document.body.style.setProperty(
     "--home-about-bg",
@@ -389,7 +387,6 @@ function updateMobileAboutColor() {
   aboutCopy?.classList.remove("is-light");
   aboutContact?.classList.remove("is-light");
 }
-
 
 /* =========================================
    MOBILE ABOUT HEIGHT
