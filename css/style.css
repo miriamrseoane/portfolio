@@ -248,6 +248,9 @@ a {
 .about-overlay.is-active {
   opacity: 1;
   visibility: visible;
+
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 
