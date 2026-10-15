@@ -11,6 +11,48 @@ const aboutView =
 let aboutOpen = false;
 
 
+
+/* =========================================
+   ABOUT MOBILE HEIGHT
+========================================= */
+
+function updateAboutHeight() {
+
+  if (!aboutView) return;
+
+  const isMobile =
+    window.matchMedia("(max-width: 900px)").matches;
+
+  if (!isMobile) {
+    aboutView.style.removeProperty("--archive-about-height");
+    return;
+  }
+
+  const copy = aboutView.querySelector(".about-copy");
+  const contact = aboutView.querySelector(".about-contact");
+
+  if (!copy || !contact) return;
+
+  const copyHeight = copy.getBoundingClientRect().height;
+  const contactHeight = contact.getBoundingClientRect().height;
+
+  const totalHeight =
+    copyHeight +
+    contactHeight +
+    24 +
+    40;
+
+  aboutView.style.setProperty(
+    "--archive-about-height",
+    `${Math.ceil(totalHeight)}px`
+  );
+}
+
+
+
+
+
+
 if (
   aboutToggle &&
   aboutView
@@ -37,6 +79,8 @@ if (
         "aria-expanded",
         String(aboutOpen)
       );
+
+       updateAboutHeight();
 
     }
   );
@@ -134,3 +178,8 @@ archiveGalleries.forEach(
 
   }
 );
+
+
+window.addEventListener("resize", updateAboutHeight);
+
+document.fonts.ready.then(updateAboutHeight);
