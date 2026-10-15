@@ -761,6 +761,42 @@ a {
   .home-page .site-footer {
     background: transparent;
   }
+
+/* =========================================
+   HOME MOBILE — SCROLL FIX
+========================================= */
+
+.home-page {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.home-page.home-about-open {
+  height: auto;
+  min-height: 100dvh;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.home-page:not(.home-about-open) .home {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.home-page:not(.home-about-open) .background-gallery {
+  height: 100dvh;
+}
+
+   .home-page .site-footer {
+  position: fixed;
+  bottom: 0;
+
+  background: transparent;
+}
+   
 }
 
 
