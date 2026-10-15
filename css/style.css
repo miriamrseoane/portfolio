@@ -796,6 +796,17 @@ a {
 
   background: transparent;
 }
+
+/* =========================================
+   HOME MOBILE — FOOTER TYPOGRAPHY
+========================================= */
+
+.home-page .gallery-credit,
+.home-page .gallery-counter {
+  font-size: 10px;
+  line-height: 1.4;
+}
+
    
 }
 
