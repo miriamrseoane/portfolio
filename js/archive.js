@@ -36,11 +36,12 @@ function updateAboutHeight() {
   const copyHeight = copy.getBoundingClientRect().height;
   const contactHeight = contact.getBoundingClientRect().height;
 
-  const totalHeight =
-    copyHeight +
-    contactHeight +
-    24 +
-    40;
+   const totalHeight =
+     copyHeight +
+     contactHeight +
+     80 +
+     24 +
+     40;
 
   aboutView.style.setProperty(
     "--archive-about-height",
