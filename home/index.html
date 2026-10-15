@@ -1,180 +1,56 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Miriam R. Seoane | Design</title>
 
-  <link
-    rel="stylesheet"
-    href="https://use.typekit.net/lut7oqt.css"
-  >
+  <link rel="stylesheet" href="https://use.typekit.net/lut7oqt.css">
+  <link rel="stylesheet" href="../css/style.css?v=8">
 
-  <link
-    rel="stylesheet"
-    href="../css/style.css?v=7"
-  />
-
-      <!-- FAVICON -->
-<link rel="icon" type="image/svg+xml" href="/img/favicon/favicon.svg">
-<link rel="icon" type="image/x-icon" href="/img/favicon/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
-  
+  <!-- FAVICON -->
+  <link rel="icon" type="image/x-icon" href="/img/favicon/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/img/favicon/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
 </head>
 
-<body>
+<body class="home-page">
 
-  <!-- =========================================
-       HEADER
-  ========================================== -->
+  <!-- HEADER -->
 
   <header class="site-header">
+    <div class="site-header-left">
 
-  <div class="site-header-left">
+      <a href="../home/" class="logo">
+        Miriam R. Seoane
+      </a>
 
-  <a
-    href="../home/"
-    class="logo"
-  >
-    Miriam R. Seoane
-  </a>
+      <a href="../Archive/" class="archive-link">
+        Archive
+      </a>
 
-  <a
-    href="../Archive/"
-    class="archive-link"
-  >
-    Archive
-  </a>
+      <button
+        class="about-toggle"
+        id="aboutToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="aboutView"
+      >
+        About
+      </button>
 
-  <button
-    class="about-toggle"
-    id="aboutToggle"
-    type="button"
-    aria-expanded="false"
-    aria-controls="aboutView"
-  >
-    About
-  </button>
-
-</div>
-
+    </div>
   </header>
 
 
-  <!-- =========================================
-       HOME
-  ========================================== -->
+  <!-- HOME -->
 
   <main class="home">
 
-
-    <!-- =========================================
-         SLIDER
-    ========================================== -->
-
-    <div
-      class="background-gallery"
-      aria-label="Selected projects"
-    >
-
-       <img
-        class="gallery-image active"
-        src="../img/lomos_white.jpg"
-        alt="Project 01"
-        data-credit=""
-      >
-
-<picture>
-    <source
-    media="(max-width: 768px)"
-    srcset="../img/mobile/home-mobile-bookcovers-02.jpg"
-    >
-      
-      <img
-        class="gallery-image active"
-        src="../img/BookCovers/Home-Desktop-Orwell.jpg"
-        alt="Dentro de la ballena - George Orwell"
-        data-credit= "Dentro de la ballena - George Orwell - Ariel · 2026"
-      >
-
-</picture>
-
-      <img
-        class="gallery-image"
-        src="../img/project-02.jpg"
-        alt="Project 02"
-        data-credit= "El libro de las plantas olvidadas - Aina S. Erice · 2026"
-      >
-
-      <img
-        class="gallery-image"
-        src="../img/project-03.jpg"
-        alt="Project 03"
-        data-credit="Austral Intrépida Collection · 2016"
-      >
-
-     
-<picture>
-    <source
-    media="(max-width: 768px)"
-    srcset="../img/mobile/home-mobile-bookcovers-01.jpg"
-    >
-
-     <img
-        class="gallery-image"
-        src="../img/BookCovers/home-desktop-bookcovers-01.webp"
-        alt="Project 04"
-        data-credit="Contraataque a los 30 - Won-pyung Sohn · Illustration: @ Hsiao-ron Cheng · [2026]"
-      >
-</picture>
-      
-      
-     
-
-      <img
-        class="gallery-image"
-        src="../img/project-05.jpg"
-        alt="Project 05"
-        data-credit="Project 05 · 2026"
-      >
-
-      <img
-        class="gallery-image"
-        src="../img/project-06.jpg"
-        alt="Project 06"
-        data-credit=" "
-      >
-
-
-      <img
-        class="gallery-image"
-        src="../img/project-07.jpg"
-        alt="Project 07"
-        data-credit="El derecho a las cosas bellas - Juan Evaristo Valls Boix · Illustration: © Marta Cartu"
-      >
-
-
-      <img
-        class="gallery-image"
-        src="../img/BFS/home-desktop-bibliotecasavater-01.jpg"
-        alt="Biblioteca Fernando Savater"
-        data-credit="Biblioteca Fernando Savater - Illustrations: © Anthony Zinonos"
-      >
-
-
-
-    </div>
-
-
-    <!-- =========================================
-         ABOUT OVERLAY
-    ========================================== -->
+    <!-- ABOUT -->
 
     <section
       class="about-overlay"
@@ -183,16 +59,13 @@
     >
 
       <div class="about-copy">
-
         <p>
           I am an Art Director and Graphic Designer, based in Barcelona.
           My projects focus on both digital and print design.
           I am also a lecturer at LCI Barcelona and UOC, where I teach
           graphic design students about editorial design.
         </p>
-
       </div>
-
 
       <div class="about-contact">
 
@@ -206,7 +79,7 @@
           <a
             href="https://www.instagram.com/miriamrseoane"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             IG: @miriamrseoane
           </a>
@@ -216,7 +89,7 @@
           <a
             href="https://www.linkedin.com/in/mrseoane/"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             LinkedIn: Miriam R. Seoane
           </a>
@@ -226,32 +99,105 @@
 
     </section>
 
+
+    <!-- SLIDER -->
+
+    <div
+      class="background-gallery"
+      aria-label="Selected projects"
+    >
+
+      <img
+        class="gallery-image active"
+        src="../img/lomos_white.jpg"
+        alt="Book spines"
+        data-credit=""
+      >
+
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcset="../img/mobile/home-mobile-bookcovers-02.jpg"
+        >
+        <img
+          class="gallery-image"
+          src="../img/BookCovers/Home-Desktop-Orwell.jpg"
+          alt="Dentro de la ballena - George Orwell"
+          data-credit="Dentro de la ballena - George Orwell - Ariel · 2026"
+        >
+      </picture>
+
+      <img
+        class="gallery-image"
+        src="../img/project-02.jpg"
+        alt="El libro de las plantas olvidadas"
+        data-credit="El libro de las plantas olvidadas - Aina S. Erice · 2026"
+      >
+
+      <img
+        class="gallery-image"
+        src="../img/project-03.jpg"
+        alt="Austral Intrépida Collection"
+        data-credit="Austral Intrépida Collection · 2016"
+      >
+
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcset="../img/mobile/home-mobile-bookcovers-01.jpg"
+        >
+        <img
+          class="gallery-image"
+          src="../img/BookCovers/home-desktop-bookcovers-01.webp"
+          alt="Contraataque a los 30 - Won-pyung Sohn"
+          data-credit="Contraataque a los 30 - Won-pyung Sohn · Illustration: @ Hsiao-ron Cheng · [2026]"
+        >
+      </picture>
+
+      <img
+        class="gallery-image"
+        src="../img/project-05.jpg"
+        alt="Project 05"
+        data-credit="Project 05 · 2026"
+      >
+
+      <img
+        class="gallery-image"
+        src="../img/project-06.jpg"
+        alt="Project 06"
+        data-credit=""
+      >
+
+      <img
+        class="gallery-image"
+        src="../img/project-07.jpg"
+        alt="El derecho a las cosas bellas"
+        data-credit="El derecho a las cosas bellas - Juan Evaristo Valls Boix · Illustration: © Marta Cartu"
+      >
+
+      <img
+        class="gallery-image"
+        src="../img/BFS/home-desktop-bibliotecasavater-01.jpg"
+        alt="Biblioteca Fernando Savater"
+        data-credit="Biblioteca Fernando Savater - Illustrations: © Anthony Zinonos"
+      >
+
+    </div>
+
   </main>
 
 
-  <!-- =========================================
-       FOOTER
-  ========================================== -->
+  <!-- FOOTER -->
 
   <footer class="site-footer">
-
-    <p class="gallery-credit">
-      Project 01 · 2026
-    </p>
-
-    <p class="gallery-counter">
-      01 / 06
-    </p>
-
+    <p class="gallery-credit"></p>
+    <p class="gallery-counter">01 / 09</p>
   </footer>
 
 
-  <!-- =========================================
-       JAVASCRIPT
-  ========================================== -->
+  <!-- JAVASCRIPT -->
 
-  <script src="../js/slider.js?v=7"></script>
+  <script src="../js/slider.js?v=8"></script>
 
 </body>
-
 </html>
