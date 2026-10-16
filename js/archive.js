@@ -136,8 +136,9 @@ archiveProjects.forEach(
 
 
 
+
 /* =========================================
-   HORIZONTAL SCROLL WITH MOUSE WHEEL
+   HORIZONTAL SCROLL — MAGIC MOUSE
    DESKTOP ONLY
 ========================================= */
 
@@ -147,67 +148,53 @@ const archiveGalleries = document.querySelectorAll(
 
 archiveGalleries.forEach((gallery) => {
 
-  gallery.addEventListener(
-    "wheel",
-    (event) => {
+  gallery.addEventListener("wheel", (event) => {
 
-      // Solo en desktop
-      if (window.innerWidth <= 900) {
-        return;
-      }
+    // Solo desktop
+    if (window.innerWidth <= 900) return;
 
-      // Respetar el scroll horizontal del trackpad
-      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
-        return;
-      }
+    const maxScroll =
+      gallery.scrollWidth - gallery.clientWidth;
 
-      // Comprobar si existe desplazamiento horizontal
-      const maxScroll =
-        gallery.scrollWidth - gallery.clientWidth;
+    if (maxScroll <= 1) return;
 
-      if (maxScroll <= 0) {
-        return;
-      }
+    // Convertir diferentes unidades a píxeles
+    const multiplier =
+      event.deltaMode === 1 ? 16 :
+      event.deltaMode === 2 ? gallery.clientHeight : 1;
 
-      // Normalizar la rueda (píxeles, líneas o páginas)
-      const multiplier =
-        event.deltaMode === 1
-          ? 16
-          : event.deltaMode === 2
-            ? gallery.clientHeight
-            : 1;
+    const deltaX = event.deltaX * multiplier;
+    const deltaY = event.deltaY * multiplier;
 
-      const delta = event.deltaY * multiplier;
+    // Priorizar el gesto horizontal del Magic Mouse.
+    // Si es principalmente vertical, convertirlo
+    // en desplazamiento horizontal.
+    const delta =
+      Math.abs(deltaX) > Math.abs(deltaY)
+        ? deltaX
+        : deltaY;
 
-      const atStart = gallery.scrollLeft <= 1;
-      const atEnd = gallery.scrollLeft >= maxScroll - 1;
+    const current = gallery.scrollLeft;
 
-      // Permitir scroll vertical al llegar a los extremos
-      if (
-        (delta < 0 && atStart) ||
-        (delta > 0 && atEnd)
-      ) {
-        return;
-      }
+    const next = Math.max(
+      0,
+      Math.min(maxScroll, current + delta)
+    );
 
-      // Convertir scroll vertical en horizontal
-      event.preventDefault();
-
-      gallery.scrollLeft = Math.max(
-        0,
-        Math.min(
-          maxScroll,
-          gallery.scrollLeft + delta
-        )
-      );
-
-    },
-    {
-      passive: false
+    // En los extremos, permitir el scroll
+    // vertical normal de la página.
+    if (Math.abs(next - current) < 0.5) {
+      return;
     }
-  );
+
+    event.preventDefault();
+
+    gallery.scrollLeft = next;
+
+  }, { passive: false });
 
 });
+
 
 
 
