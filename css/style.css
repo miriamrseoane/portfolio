@@ -826,3 +826,21 @@ a {
     transition-duration: 0.01ms;
   }
 }
+
+
+/* =========================================
+   CUSTOM CURSOR — DESKTOP
+========================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+  body,
+  a,
+  button,
+  .background-gallery,
+  .archive-project-header,
+  .archive-gallery {
+    cursor: url("../img/cursor-blue.svg") 6 6, auto;
+  }
+
+}
