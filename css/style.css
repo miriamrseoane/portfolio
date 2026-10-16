@@ -441,7 +441,7 @@ a {
   overflow-y: hidden;
 
   overscroll-behavior-x: contain;
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   scroll-snap-type: x proximity;
 
   cursor: ew-resize;
