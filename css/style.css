@@ -300,7 +300,10 @@ a {
 }
 
 .about-contact a:hover {
-  text-decoration: underline;
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 
