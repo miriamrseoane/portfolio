@@ -295,8 +295,17 @@ a {
 }
 
 .about-contact a {
+  position: relative;
+  z-index: 1;
+
+  display: inline-block;
+  padding: 3px 0;
+
   color: inherit;
   text-decoration: none;
+
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .about-contact a:hover {
