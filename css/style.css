@@ -843,13 +843,15 @@ a {
 
 @media (hover: hover) and (pointer: fine) {
 
+  html,
   body,
   a,
   button,
   .background-gallery,
   .archive-project-header,
-  .archive-gallery {
-    cursor: url("../img/cursor-blue.svg") 6 6, auto;
+  .archive-gallery,
+  .about-overlay.is-active {
+    cursor: url("../img/cursor-blue.png") 16 16, auto !important;
   }
 
 }
