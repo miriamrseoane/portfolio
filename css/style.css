@@ -441,8 +441,8 @@ a {
   overflow-y: hidden;
 
   overscroll-behavior-x: contain;
-  scroll-behavior: smooth;
-  scroll-snap-type: x proximity;
+    scroll-behavior: auto;
+   scroll-snap-type: none;
 
   cursor: ew-resize;
   scrollbar-width: none;
