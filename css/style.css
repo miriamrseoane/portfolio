@@ -837,21 +837,4 @@ a {
 }
 
 
-/* =========================================
-   CUSTOM CURSOR — DESKTOP
-========================================= */
 
-@media (hover: hover) and (pointer: fine) {
-
-  html,
-  body,
-  a,
-  button,
-  .background-gallery,
-  .archive-project-header,
-  .archive-gallery,
-  .about-overlay.is-active {
-    cursor: url("../img/cursor-blue.png") 16 16, auto !important;
-  }
-
-}
